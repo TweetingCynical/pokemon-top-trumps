@@ -13,19 +13,32 @@ const dataOptions = [
   "primeape",
 ];
 const partURL = "https://pokeapi.co/api/v2/pokemon/";
+const partGiphyURL = "https://api.giphy.com/v1/gifs/search";
+const giphyAPIKey = "L4a6rTsWCnxGkYAUqy5uKBSXdxkTX4ue";
 
 // Function to be used for fetching data from Pokemon API
-function getData() {
+function getPokemonData() {
   const optionsIndex = randomOption();
   const fullURL = `${partURL}${dataOptions[optionsIndex]}`;
-  console.log(fullURL);
 
   // Data fetch
   $.ajax({
     url: fullURL,
     method: "GET",
   }).then(function (data) {
-    console.log(data);
+    return;
+  });
+}
+
+// Function for getting a random GIPHY image
+function getGiphyData(state) {
+  const fullGiphyURL = `${partGiphyURL}?q=${state}&api_key=${giphyAPIKey}&limit=10`;
+
+  // Data fetch
+  $.ajax({
+    url: fullGiphyURL,
+    method: "GET",
+  }).then(function (data) {
     return;
   });
 }
