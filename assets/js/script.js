@@ -15,17 +15,28 @@ const dataOptions = [
 const partURL = "https://pokeapi.co/api/v2/pokemon/";
 const partGiphyURL = "https://api.giphy.com/v1/gifs/search";
 const giphyAPIKey = "L4a6rTsWCnxGkYAUqy5uKBSXdxkTX4ue";
+let userCardData = [];
+let cpuCardData = [];
 
 // Function to be used for fetching data from Pokemon API
-function getPokemonData() {
+function getPokemonData(whoseCardData) {
   const optionsIndex = randomOption();
-  const fullURL = `${partURL}${dataOptions[optionsIndex]}`;
+  const fullPokemonURL = `${partURL}${dataOptions[optionsIndex]}`;
 
   // Data fetch
   $.ajax({
-    url: fullURL,
+    url: fullPokemonURL,
     method: "GET",
   }).then(function (data) {
+    let apiData = [
+      data.name,
+      data.stats[0]["base_stat"],
+      data.stats[1]["base_stat"],
+      data.stats[2]["base_stat"],
+      data.stats[5]["base_stat"],
+      data.sprites.other["official-artwork"].front_shiny,
+    ];
+    whoseCardData.push(apiData);
     return;
   });
 }
