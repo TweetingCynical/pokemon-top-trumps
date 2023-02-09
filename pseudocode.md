@@ -2,18 +2,19 @@
 
 **** question - what happens if the values are equal and there is a draw? i assume the player scores 0, so we will need some backup cards (maybe pull 20?)
 
-1. LOCAL STORAGE. When we hit the start button we want to save API data for 10 random cards into local storage. These will be the cards that we play with and will save us repeatedly having to call the Pokemon API
-2. Create a "deck" array with the following information from the Pokemon API: Name, Image, HP, Attack, Defense, Speed. We need to create button elements to display these on player cards.
+<!-- 1. LOCAL STORAGE. When we hit the start button we want to save API data for 10 random cards into local storage. These will be the cards that we play with and will save us repeatedly having to call the Pokemon API
+2. Create a "deck" array with the following information from the Pokemon API: Name, Image, HP, Attack, Defense, Speed. We need to create button elements to display these on player cards. -->
+Change this to beginning of every round
 3. Set the game up for 5 rounds. Create a while loop that continues as long as the number of rounds is below 6.
 4. Start a loop to play the game:
   a. Randomly select two cards from the pool of cards. Put one in Player card element and the other in the Opponent card element.
   b. Display the card data on Player card. Display a placeholder image on Opponent card (suggest this https://www.google.com/url?sa=i&url=https%3A%2F%2Fbulbapedia.bulbagarden.net%2Fw%2Findex.php%3Ftitle%3DFile%3ACardback.jpg%26oldid%3D0&psig=AOvVaw2_Nmj9bfMXGGMlhEKoFkp3&ust=1675977334187000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCPCS2J_shv0CFQAAAAAdAAAAABAD).
-  c. Prompt Player to choose a category (HP, Attack, Defense, Speed) to compare between the two cards.
+  c. Prompt Player to choose a category (HP, Attack, Defense, Speed)
   d. Display opponent card.
   e. Determine the winner based on the chosen category and which category value/integer is higher. The card with the higher value in that category wins.
-  f. Update the score +1 to the winner.
+  f. Update the score +1 to the winner (in logic and on display)
   g. Update the round number by +1 (in logic and on display)
-  h. Repeat steps a to d until 5 rounds have been played 
+  h. Repeat steps a to h until 5 rounds have been played 
 5. Determine the winner of the game by counting the number of rounds won. The player with the most rounds won, wins.
 6. For winners, display a 'celebrate' gif. For losers, display a 'thumbs down' gif.
 7. Option to restart the game. This restart button should clear the local storage.
@@ -154,7 +155,7 @@ newGame();
 - error handling for the API calls
 - promises to handle the asynchronous API calls
 - can we use the JavaScript Array.sort() method instead of a loop to sort the deck based on a certain category
-- change while loop to a for loop with a fixed number of iterations (5
+- change while loop to a for loop with a fixed number of iterations 5
 - switch statement instead of if-else statements to handle the comparison of cards based on the chosen category
 - animate the cards when they are drawn ? e.g. slide in effect
 - need a single object to store the score for each player instead of having separate variables for player score and opponent score
