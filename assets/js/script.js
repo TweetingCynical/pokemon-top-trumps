@@ -1,19 +1,4 @@
 // Set intial global variables needed for accessing data
-// Once MVP is working, replace this list with full apid options list. Use 10 to begin with
-// We could fill this with a for loop to i=199, using this code: https://pokeapi.co/api/v2/pokemon/?offset=0&limit=200
-// Or we could simply get the data using a random index using this code: https://pokeapi.co/api/v2/pokemon/[index]/
-const dataOptions = [
-  "ditto",
-  "pikachu",
-  "squirtle",
-  "metapod",
-  "pidgey",
-  "raichu",
-  "jigglypuff",
-  "oddish",
-  "gloom",
-  "primeape",
-];
 const partURL = "https://pokeapi.co/api/v2/pokemon/";
 const partGiphyURL = "https://api.giphy.com/v1/gifs/search";
 const giphyAPIKey = "L4a6rTsWCnxGkYAUqy5uKBSXdxkTX4ue";
@@ -23,8 +8,7 @@ let cpuCardData = [];
 // Function to be used for fetching data from Pokemon API
 function getPokemonData(whoseCardData) {
   const optionsIndex = randomOption();
-  const fullPokemonURL = `${partURL}${dataOptions[optionsIndex]}`;
-  // const fullPokemonURL = `${partURL}${optionsIndex}`;
+  const fullPokemonURL = `${partURL}${optionsIndex}`;
 
   // Data fetch
   $.ajax({
@@ -59,8 +43,7 @@ function getGiphyData(state) {
 
 // Get a random number for referencing a character choice from dataOptions
 function randomOption() {
-  const randomIndex = Math.floor(Math.random() * dataOptions.length);
-  // const randomIndex = Math.floor(Math.random() * 10) + 1;
+  const randomIndex = Math.floor(Math.random() * 200) + 1;
   return randomIndex;
 }
 
