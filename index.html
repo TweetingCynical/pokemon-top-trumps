@@ -12,27 +12,25 @@
     <header>
       <h1>Top Trumps Game</h1>
       <section id="score bg-dark text-light p-5 text-center">
-        <div class="container d-flex justify-content-center mr-5"></div>
-<div class="border border-4 p-3 mr-5">
+  <div class="border border-4 p-3 mr-5">
 try
 </div>
       </section>
-      <section id="round">
-        <button
-        type="button" class="btn btn-floating btn-lg"
-        id="btn-back-top">
-      </div>
-      <i class="fas fa-arrow-up"></i>
-    </button>
+      <section id="rounds">
+        <div class="container-round">
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary">Left</button>
+            <button type="button" class="btn btn-secondary">Right</button>
+          </div>
       </section>
     </header>
 
     <main>
       <section id="user-card">
-        
         <div class="card" style="width: 18rem;">
           <img src="..." class="card-img-top" alt="...">
           <div class="card-body">
+            <h5 class="card-title">User cards</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
           </div>
         </div>
@@ -44,7 +42,7 @@ try
           <div class="card" style="width: 18rem;">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
-              <h5 class="card-title">Card title</h5>
+              <h5 class="card-title">Oponent cards</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
             </div>
             <ul class="list-group list-group-flush">
@@ -59,37 +57,42 @@ try
           </div>
         </div>
       </section>
-      <section id="start-button MB-5">
+      <section id="start-button">
         <button type="button" class="btn btn-primary">Start</button>
       </section>
-      <section id="cpu-card"></section>
-      <section id="round-modal">
-
-<!-- Vertically centered scrollable modal -->
-<div class="modal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-  ...
-</div>
-
+      <section id="cpu-card">
+        <div class="card border-danger mb-3" style="max-width: 18rem;">
+          <div class="card-header">Header</div>
+          <div class="card-body text-danger">
+            <h5 class="card-title">Danger card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>
       </section>
+      <section id="rounds-modal">
+        <div class="container-modal">
+        <div class="modal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>Modal body text goes here.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </section>      
     </main>
 
     <!-- Links to Bootstrap -->
