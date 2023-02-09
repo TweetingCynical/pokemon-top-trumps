@@ -34,7 +34,7 @@ h1 {
 }
 
 .card {
-  width: 300px;
+  width: 200px;
   height: 500px;
 }
 #user-card {
@@ -49,6 +49,12 @@ h1 {
 #score {
   margin-left: 50px;
   justify-content: center;
+}
+
+.scores-text {
+  margin: 0;
+  font-size: 40px;
+  text-align: center;
 }
 
 #start-button {
