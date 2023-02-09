@@ -1,9 +1,14 @@
+// jQuery links to html elements
+const userCard = $("#userCard");
+const cpuCard = $("#cpuCard");
+
 // Set intial global variables needed for accessing data
 const partURL = "https://pokeapi.co/api/v2/pokemon/";
 const partGiphyURL = "https://api.giphy.com/v1/gifs/search";
 const giphyAPIKey = "L4a6rTsWCnxGkYAUqy5uKBSXdxkTX4ue";
 let userCardData = [];
 let cpuCardData = [];
+const abilityOptions = ["HP", "Attack", "Defense", "Speed"];
 
 // Function to be used for fetching data from Pokemon API
 function getPokemonData(whoseCardData) {
@@ -52,7 +57,38 @@ function randomOption() {
 // Check localStorage for cards data
 
 // Create cards in html
-
+function createCardElements(whoseCard) {
+  const whoseCardEl = $(`#${whoseCard}`);
+  const cardEl = $("<div>")
+    .addClass("card shadow-lg p-3 mb-5 rounded")
+    .attr("id", `${whoseCard}Container`);
+  const nameEl = $("<h3>")
+    .addClass("cardHeader")
+    .attr("id", `${whoseCard}Name`);
+  const imgEl = $("<img>")
+    .addClass("cardImage")
+    .attr("id", `${whoseCard}Image`);
+  cardEl.append(nameEl, imgEl);
+  for (let i = 0; i < 4; i++) {
+    const abilityBtn = $("<button>")
+      .addClass("cardAbilityBtn btn btn-primary")
+      .attr("id", `${whoseCard}${abilityOptions[i]}Btn`)
+      .attr("type", "button");
+    const abilityDiv = $("<div>")
+      .addClass("cardAbility")
+      .attr("id", `${whoseCard}${abilityOptions[i]}Div`);
+    const abilityTitle = $("<p>")
+      .attr("id", `${whoseCard}${abilityOptions[i]}Title`)
+      .text(`${abilityOptions[i]}`);
+    const abilityValue = $("<p>")
+      .attr("id", `${whoseCard}${abilityOptions[i]}Value`)
+      .text("TestDIV");
+    cardEl.append(
+      abilityBtn.append(abilityDiv.append(abilityTitle, abilityValue))
+    );
+  }
+  whoseCardEl.append(cardEl);
+}
 // Fill cards with data >>> Show values for user, hide values for cpu
 
 // Enable onclick events for both cards, which highlights the selected attribute on both cards, then reveals cpu attributes
@@ -62,3 +98,7 @@ function randomOption() {
 // End game logic showing giphy for win/loss
 
 // Play again option, including clearing localStorage, resetting scores, and rerunning the getData
+
+// Initialise game options
+createCardElements("userCard");
+createCardElements("cpuCard");

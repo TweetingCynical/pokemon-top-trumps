@@ -1,0 +1,61 @@
+html {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+#userCardContainer,
+#cpuCardContainer {
+  background: url("../images/cardback.png");
+  background-size: cover;
+  background-repeat: none;
+  background-position: center;
+  padding: 5px;
+  border: 15px solid var(--pkGolden);
+  min-width: 400px;
+}
+
+.cardAbilityBtn {
+  margin: 5px;
+  padding: 10px;
+}
+
+.cardAbility {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardAbility p {
+  margin-bottom: 0;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.cardZone {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#userCardHPBtn,
+#cpuCardHPBtn {
+  background-color: var(--pkBostonRed);
+}
+
+#userCardAttackBtn,
+#cpuCardAttackBtn {
+  background-color: var(--pkGolden);
+}
+
+#userCardDefenseBtn,
+#cpuCardDefenseBtn {
+  background-color: var(--pkCerulean);
+}
+
+#userCardSpeedBtn,
+#cpuCardSpeedBtn {
+  background-color: var(--pkGoldFoil);
+}
