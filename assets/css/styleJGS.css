@@ -1,0 +1,91 @@
+html {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+#userCardContainer,
+#cpuCardContainer {
+  background: url("../images/cardback.png");
+  background-size: cover;
+  background-repeat: none;
+  background-position: center;
+  padding: 10px;
+  border: 15px solid var(--pkGolden);
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardAbilityBtn {
+  margin: 5px;
+  padding: 10px;
+  min-width: 280px
+}
+
+.cardAbility {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardAbility p {
+  margin-bottom: 0;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.cardZone {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#userCardHPBtn,
+#cpuCardHPBtn {
+  background-color: var(--pkBostonRed);
+}
+
+#userCardAttackBtn,
+#cpuCardAttackBtn {
+  background-color: var(--pkGolden);
+}
+
+#userCardDefenseBtn,
+#cpuCardDefenseBtn {
+  background-color: var(--pkCerulean);
+}
+
+#userCardSpeedBtn,
+#cpuCardSpeedBtn {
+  background-color: var(--pkGoldFoil);
+}
+
+#userCardHPBtn:hover,
+#cpuCardHPBtn:hover,
+#userCardAttackBtn:hover,
+#cpuCardAttackBtn:hover,
+#userCardDefenseBtn:hover,
+#cpuCardDefenseBtn:hover,
+#userCardSpeedBtn:hover,
+#cpuCardSpeedBtn:hover {
+  transform: scale(1.05);
+  transform-origin: center;
+}
+
+.cardImage {
+  min-width: 200px;
+  min-height: 200px;
+  border: 1px solid var(--pkBostonRed)
+}
+
+.cardHeader {
+  background: var(--pkGoldFoil);
+  color: var(--pkCerulean);
+  min-width: 240px;
+  text-align: center;
+}
