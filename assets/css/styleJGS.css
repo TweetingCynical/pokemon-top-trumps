@@ -9,14 +9,19 @@ html {
   background-size: cover;
   background-repeat: none;
   background-position: center;
-  padding: 5px;
+  padding: 10px;
   border: 15px solid var(--pkGolden);
   min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .cardAbilityBtn {
   margin: 5px;
   padding: 10px;
+  min-width: 280px
 }
 
 .cardAbility {
@@ -58,4 +63,29 @@ html {
 #userCardSpeedBtn,
 #cpuCardSpeedBtn {
   background-color: var(--pkGoldFoil);
+}
+
+#userCardHPBtn:hover,
+#cpuCardHPBtn:hover,
+#userCardAttackBtn:hover,
+#cpuCardAttackBtn:hover,
+#userCardDefenseBtn:hover,
+#cpuCardDefenseBtn:hover,
+#userCardSpeedBtn:hover,
+#cpuCardSpeedBtn:hover {
+  transform: scale(1.05);
+  transform-origin: center;
+}
+
+.cardImage {
+  min-width: 200px;
+  min-height: 200px;
+  border: 1px solid var(--pkBostonRed)
+}
+
+.cardHeader {
+  background: var(--pkGoldFoil);
+  color: var(--pkCerulean);
+  min-width: 240px;
+  text-align: center;
 }

@@ -63,15 +63,17 @@ function createCardElements(whoseCard) {
     .addClass("card shadow-lg p-3 mb-5 rounded")
     .attr("id", `${whoseCard}Container`);
   const nameEl = $("<h3>")
-    .addClass("cardHeader")
-    .attr("id", `${whoseCard}Name`);
+    .addClass("cardHeader shadow-lg rounded p-1")
+    .attr("id", `${whoseCard}Name`)
+    .text("Character");
   const imgEl = $("<img>")
-    .addClass("cardImage")
-    .attr("id", `${whoseCard}Image`);
+    .addClass("cardImage shadow-lg rounded bg-white")
+    .attr("id", `${whoseCard}Image`)
+    .attr("alt", "pokemon character shiny image");
   cardEl.append(nameEl, imgEl);
   for (let i = 0; i < 4; i++) {
     const abilityBtn = $("<button>")
-      .addClass("cardAbilityBtn btn btn-primary")
+      .addClass("cardAbilityBtn btn btn-primary shadow-lg")
       .attr("id", `${whoseCard}${abilityOptions[i]}Btn`)
       .attr("type", "button");
     const abilityDiv = $("<div>")
