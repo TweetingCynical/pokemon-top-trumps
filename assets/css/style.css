@@ -57,6 +57,24 @@ h1 {
   text-align: center;
 }
 
+.game-round {
+  border: 2px solid #CC0000;
+  margin-bottom: 20px;
+  min-width: 10px;
+  margin-top: 20px;
+  min-height: 100px;
+}
+
+.rounds-text {
+  margin: 0;
+  font-size: 40px;
+  text-align: center;
+}
+#rounds {
+  margin-left: 70px;
+  justify-content: center
+}
+
 #start-button {
 width: 500PX;
 height: 80px;
