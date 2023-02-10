@@ -52,7 +52,12 @@ function randomOption() {
   return randomIndex;
 }
 
-// Start button click >>> Capture data and store in variables
+// Capture data and store in variables
+function createGameData(whoseCardData) {
+  for (let i = 0; i < 5; i++) {
+    getPokemonData(whoseCardData);
+  }
+}
 
 // Check localStorage for cards data
 
@@ -104,3 +109,5 @@ function createCardElements(whoseCard) {
 // Initialise game options
 createCardElements("userCard");
 createCardElements("cpuCard");
+createGameData("userCardData");
+createGameData("cpuCardData");
