@@ -12,24 +12,39 @@ const abilityOptions = ["HP", "Attack", "Defense", "Speed"];
 
 // Function to be used for fetching data from Pokemon API
 function getPokemonData(whoseCardData) {
+  // Create optionsIndex filled with 5 random numbers for creating api keys
   const optionsIndex = randomOption();
-  const fullPokemonURL = `${partURL}${optionsIndex}`;
+  // Empty arr for storing promises together
+  let promises = [];
 
-  // Data fetch
-  $.ajax({
-    url: fullPokemonURL,
-    method: "GET",
-  }).then(function (data) {
-    let apiData = [
-      data.name,
-      data.stats[0]["base_stat"],
-      data.stats[1]["base_stat"],
-      data.stats[2]["base_stat"],
-      data.stats[5]["base_stat"],
-      data.sprites.other["official-artwork"].front_shiny,
-    ];
-    whoseCardData.push(apiData);
-    return;
+  // Create promises for all 5 api calls
+  for (let index = 0; index < optionsIndex.length; index++) {
+    let ajaxData = {
+      url: `${partURL}${optionsIndex[index]}`,
+      method: "GET",
+    };
+    let promise = $.ajax(ajaxData);
+    promises.push(promise);
+  }
+
+  // Get all promises data and store the pokemon information we need for game data
+  Promise.all(promises).then((data) => {
+    for (let i = 0; i < data.length; i++) {
+      whoseCardData.push([
+        // Pokemon name
+        data[i].name,
+        // HP
+        data[i].stats[0]["base_stat"],
+        // Attack
+        data[i].stats[1]["base_stat"],
+        // Defense
+        data[i].stats[2]["base_stat"],
+        // Speed
+        data[i].stats[5]["base_stat"],
+        // Pokemon image
+        data[i].sprites.other["official-artwork"].front_shiny,
+      ]);
+    }
   });
 }
 
@@ -48,11 +63,16 @@ function getGiphyData(state) {
 
 // Get a random number for referencing a character choice from dataOptions
 function randomOption() {
-  const randomIndex = Math.floor(Math.random() * 200) + 1;
-  return randomIndex;
-}
+  // Empty array for storing random numbers
+  const randomArr = [];
 
-// Start button click >>> Capture data and store in variables
+  // For loop to get 5 random numbers. NOTE: Change the multiplier to get a different number of options
+  for (let iteration = 0; iteration < 5; iteration++) {
+    const randomIndex = Math.floor(Math.random() * 200) + 1;
+    randomArr.push(randomIndex);
+  }
+  return randomArr;
+}
 
 // Check localStorage for cards data
 
@@ -73,7 +93,7 @@ function createCardElements(whoseCard) {
   cardEl.append(nameEl, imgEl);
   for (let i = 0; i < 4; i++) {
     const abilityBtn = $("<button>")
-      .addClass("cardAbilityBtn btn btn-primary shadow-lg")
+      .addClass(`cardAbilityBtn ${whoseCard}Btn btn btn-primary shadow-lg`)
       .attr("id", `${whoseCard}${abilityOptions[i]}Btn`)
       .attr("type", "button");
     const abilityDiv = $("<div>")
@@ -83,6 +103,7 @@ function createCardElements(whoseCard) {
       .attr("id", `${whoseCard}${abilityOptions[i]}Title`)
       .text(`${abilityOptions[i]}`);
     const abilityValue = $("<p>")
+      .addClass(`${abilityOptions[i]}`)
       .attr("id", `${whoseCard}${abilityOptions[i]}Value`)
       .text("TestDIV");
     cardEl.append(
@@ -91,6 +112,13 @@ function createCardElements(whoseCard) {
   }
   whoseCardEl.append(cardEl);
 }
+
+// Add event listener for userCardBtn
+$("#userCard").on("click", ".userCardBtn", function () {
+  let userChoice = $(this).find("p[id$='Value']").attr("class");
+  return console.log(userChoice);
+});
+
 // Fill cards with data >>> Show values for user, hide values for cpu
 
 // Enable onclick events for both cards, which highlights the selected attribute on both cards, then reveals cpu attributes
@@ -104,3 +132,5 @@ function createCardElements(whoseCard) {
 // Initialise game options
 createCardElements("userCard");
 createCardElements("cpuCard");
+getPokemonData(userCardData);
+getPokemonData(cpuCardData);
