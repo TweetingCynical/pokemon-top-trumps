@@ -115,6 +115,9 @@ function createCardElements(whoseCard) {
 
 // Add event listener for userCardBtn
 $("#userCard").on("click", ".userCardBtn", function () {
+  // NOTE: This is NOT ready yet. Just an experiment for how to handle the visual change
+  $(this).attr("id", "selected");
+  // Get the class of the button selected
   let userChoice = $(this).find("p[id$='Value']").attr("class");
   return console.log(userChoice);
 });

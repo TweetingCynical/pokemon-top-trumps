@@ -89,3 +89,9 @@ html {
   min-width: 240px;
   text-align: center;
 }
+
+#selected {
+  background: forestgreen;
+  transform: scale(1.05);
+  transform-origin: center;
+}
