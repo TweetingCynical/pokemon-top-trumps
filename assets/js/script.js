@@ -13,13 +13,21 @@ const abilityOptions = ["HP", "Attack", "Defense", "Speed"];
 // Function to be used for fetching data from Pokemon API
 function getPokemonData(whoseCardData) {
   const optionsIndex = randomOption();
-  const fullPokemonURL = `${partURL}${optionsIndex}`;
+  console.log(optionsIndex);
+  let promises = [];
 
-  // Data fetch
-  $.ajax({
-    url: fullPokemonURL,
-    method: "GET",
-  }).then(function (data) {
+  for (let index = 0; index < optionsIndex.length; index++) {
+    let ajaxData = {
+      url: `${partURL}${optionsIndex[index]}`,
+      method: "GET",
+    };
+    console.log(`${partURL}${optionsIndex[index]}`);
+    let promise = $.ajax(ajaxData);
+    promises.push(promise);
+  }
+
+  Promise.all(promises).then((data) => {
+    console.log(data);
     let apiData = [
       data.name,
       data.stats[0]["base_stat"],
@@ -48,8 +56,12 @@ function getGiphyData(state) {
 
 // Get a random number for referencing a character choice from dataOptions
 function randomOption() {
-  const randomIndex = Math.floor(Math.random() * 200) + 1;
-  return randomIndex;
+  const randomArr = [];
+  for (let iteration = 0; iteration < 5; iteration++) {
+    const randomIndex = Math.floor(Math.random() * 200) + 1;
+    randomArr.push(randomIndex);
+  }
+  return randomArr;
 }
 
 // Capture data and store in variables
@@ -109,5 +121,5 @@ function createCardElements(whoseCard) {
 // Initialise game options
 createCardElements("userCard");
 createCardElements("cpuCard");
-createGameData("userCardData");
-createGameData("cpuCardData");
+createGameData(userCardData);
+// createGameData(cpuCardData);
