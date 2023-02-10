@@ -12,9 +12,12 @@ const abilityOptions = ["HP", "Attack", "Defense", "Speed"];
 
 // Function to be used for fetching data from Pokemon API
 function getPokemonData(whoseCardData) {
+  // Create optionsIndex filled with 5 random numbers for creating api keys
   const optionsIndex = randomOption();
+  // Empty arr for storing promises together
   let promises = [];
 
+  // Create promises for all 5 api calls
   for (let index = 0; index < optionsIndex.length; index++) {
     let ajaxData = {
       url: `${partURL}${optionsIndex[index]}`,
@@ -24,14 +27,21 @@ function getPokemonData(whoseCardData) {
     promises.push(promise);
   }
 
+  // Get all promises data and store the pokemon information we need for game data
   Promise.all(promises).then((data) => {
     for (let i = 0; i < data.length; i++) {
       whoseCardData.push([
+        // Pokemon name
         data[i].name,
+        // HP
         data[i].stats[0]["base_stat"],
+        // Attack
         data[i].stats[1]["base_stat"],
+        // Defense
         data[i].stats[2]["base_stat"],
+        // Speed
         data[i].stats[5]["base_stat"],
+        // Pokemon image
         data[i].sprites.other["official-artwork"].front_shiny,
       ]);
     }
@@ -53,7 +63,10 @@ function getGiphyData(state) {
 
 // Get a random number for referencing a character choice from dataOptions
 function randomOption() {
+  // Empty array for storing random numbers
   const randomArr = [];
+
+  // For loop to get 5 random numbers. NOTE: Change the multiplier to get a different number of options
   for (let iteration = 0; iteration < 5; iteration++) {
     const randomIndex = Math.floor(Math.random() * 200) + 1;
     randomArr.push(randomIndex);
