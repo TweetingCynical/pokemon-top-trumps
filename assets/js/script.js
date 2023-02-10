@@ -13,7 +13,6 @@ const abilityOptions = ["HP", "Attack", "Defense", "Speed"];
 // Function to be used for fetching data from Pokemon API
 function getPokemonData(whoseCardData) {
   const optionsIndex = randomOption();
-  console.log(optionsIndex);
   let promises = [];
 
   for (let index = 0; index < optionsIndex.length; index++) {
@@ -21,23 +20,21 @@ function getPokemonData(whoseCardData) {
       url: `${partURL}${optionsIndex[index]}`,
       method: "GET",
     };
-    console.log(`${partURL}${optionsIndex[index]}`);
     let promise = $.ajax(ajaxData);
     promises.push(promise);
   }
 
   Promise.all(promises).then((data) => {
-    console.log(data);
-    let apiData = [
-      data.name,
-      data.stats[0]["base_stat"],
-      data.stats[1]["base_stat"],
-      data.stats[2]["base_stat"],
-      data.stats[5]["base_stat"],
-      data.sprites.other["official-artwork"].front_shiny,
-    ];
-    whoseCardData.push(apiData);
-    return;
+    for (let i = 0; i < data.length; i++) {
+      whoseCardData.push([
+        data[i].name,
+        data[i].stats[0]["base_stat"],
+        data[i].stats[1]["base_stat"],
+        data[i].stats[2]["base_stat"],
+        data[i].stats[5]["base_stat"],
+        data[i].sprites.other["official-artwork"].front_shiny,
+      ]);
+    }
   });
 }
 
@@ -62,13 +59,6 @@ function randomOption() {
     randomArr.push(randomIndex);
   }
   return randomArr;
-}
-
-// Capture data and store in variables
-function createGameData(whoseCardData) {
-  for (let i = 0; i < 5; i++) {
-    getPokemonData(whoseCardData);
-  }
 }
 
 // Check localStorage for cards data
@@ -121,5 +111,5 @@ function createCardElements(whoseCard) {
 // Initialise game options
 createCardElements("userCard");
 createCardElements("cpuCard");
-createGameData(userCardData);
-// createGameData(cpuCardData);
+getPokemonData(userCardData);
+getPokemonData(cpuCardData);
