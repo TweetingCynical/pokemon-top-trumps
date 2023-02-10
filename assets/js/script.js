@@ -115,8 +115,8 @@ function createCardElements(whoseCard) {
   whoseCardEl.append(cardEl);
 
   // NOTE: This needs to be correctly placed later, but for now is being used to test:
-  $(".userCardName").removeClass("hidden");
-  $(".userCardImage").removeClass("hidden");
+  $("#userCardName").removeClass("hidden");
+  $("#userCardImage").removeClass("hidden");
   $(".userCardBtn").removeClass("hidden");
 }
 
@@ -130,8 +130,8 @@ $("#userCard").on("click", ".userCardBtn", function () {
 });
 
 function showCPUCard() {
-  $(".cpuCardName").removeClass("hidden");
-  $(".cpuCardImage").removeClass("hidden");
+  $("#cpuCardName").removeClass("hidden");
+  $("#cpuCardImage").removeClass("hidden");
   $(".cpuCardBtn").removeClass("hidden");
 }
 // Fill cards with data >>> Show values for user, hide values for cpu
