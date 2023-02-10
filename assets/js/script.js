@@ -93,7 +93,7 @@ function createCardElements(whoseCard) {
   cardEl.append(nameEl, imgEl);
   for (let i = 0; i < 4; i++) {
     const abilityBtn = $("<button>")
-      .addClass("cardAbilityBtn btn btn-primary shadow-lg")
+      .addClass(`cardAbilityBtn ${whoseCard}Btn btn btn-primary shadow-lg`)
       .attr("id", `${whoseCard}${abilityOptions[i]}Btn`)
       .attr("type", "button");
     const abilityDiv = $("<div>")
@@ -103,6 +103,7 @@ function createCardElements(whoseCard) {
       .attr("id", `${whoseCard}${abilityOptions[i]}Title`)
       .text(`${abilityOptions[i]}`);
     const abilityValue = $("<p>")
+      .addClass(`${abilityOptions[i]}`)
       .attr("id", `${whoseCard}${abilityOptions[i]}Value`)
       .text("TestDIV");
     cardEl.append(
@@ -111,6 +112,13 @@ function createCardElements(whoseCard) {
   }
   whoseCardEl.append(cardEl);
 }
+
+// Add event listener for userCardBtn
+$("#userCard").on("click", ".userCardBtn", function () {
+  let userChoice = $(this).find("p[id$='Value']").attr("class");
+  return console.log(userChoice);
+});
+
 // Fill cards with data >>> Show values for user, hide values for cpu
 
 // Enable onclick events for both cards, which highlights the selected attribute on both cards, then reveals cpu attributes
