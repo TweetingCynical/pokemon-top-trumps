@@ -83,17 +83,19 @@ function createCardElements(whoseCard) {
     .addClass("card shadow-lg p-3 mb-5 rounded")
     .attr("id", `${whoseCard}Container`);
   const nameEl = $("<h3>")
-    .addClass("cardHeader shadow-lg rounded p-1")
+    .addClass("cardHeader shadow-lg rounded p-1 hidden")
     .attr("id", `${whoseCard}Name`)
     .text("Character");
   const imgEl = $("<img>")
-    .addClass("cardImage shadow-lg rounded bg-white")
+    .addClass("cardImage shadow-lg rounded bg-white hidden")
     .attr("id", `${whoseCard}Image`)
     .attr("alt", "pokemon character shiny image");
   cardEl.append(nameEl, imgEl);
   for (let i = 0; i < 4; i++) {
     const abilityBtn = $("<button>")
-      .addClass(`cardAbilityBtn ${whoseCard}Btn btn btn-primary shadow-lg`)
+      .addClass(
+        `cardAbilityBtn ${whoseCard}Btn btn btn-primary shadow-lg hidden`
+      )
       .attr("id", `${whoseCard}${abilityOptions[i]}Btn`)
       .attr("type", "button");
     const abilityDiv = $("<div>")
@@ -111,17 +113,27 @@ function createCardElements(whoseCard) {
     );
   }
   whoseCardEl.append(cardEl);
+
+  // NOTE: This needs to be correctly placed later, but for now is being used to test:
+  $(".userCardName").removeClass("hidden");
+  $(".userCardImage").removeClass("hidden");
+  $(".userCardBtn").removeClass("hidden");
 }
 
 // Add event listener for userCardBtn
 $("#userCard").on("click", ".userCardBtn", function () {
   // NOTE: This is NOT ready yet. Just an experiment for how to handle the visual change
-  $(this).attr("id", "selected");
-  // Get the class of the button selected
   let userChoice = $(this).find("p[id$='Value']").attr("class");
+  showCPUCard();
+  $(`.${userChoice}`).parent().parent().attr("id", "selected");
   return console.log(userChoice);
 });
 
+function showCPUCard() {
+  $(".cpuCardName").removeClass("hidden");
+  $(".cpuCardImage").removeClass("hidden");
+  $(".cpuCardBtn").removeClass("hidden");
+}
 // Fill cards with data >>> Show values for user, hide values for cpu
 
 // Enable onclick events for both cards, which highlights the selected attribute on both cards, then reveals cpu attributes
