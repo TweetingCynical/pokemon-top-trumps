@@ -1,3 +1,77 @@
+:root {
+  --pkRed: #FF0000;
+  --pkBostonRed: #CC0000;
+  --pkCerulean: #3B4CCA;
+  --pkGolden: #FFDE00;
+  --pkGoldFoil: #B3A125;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  color: var(--pkGolden);
+}
+
+#logo {
+  max-height: 50px;
+  margin: 5px;
+}
+
+body {
+  background-color: var(--pkCerulean);
+}
+
+#title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#title h1 {
+  text-shadow: -2px 0px 0px red,
+    2px 0px 0px red,
+    0px -2px 0px red,
+    0px 2px 0px red;
+  color: var(--pkGolden);
+}
+
+#scores,
+#rounds {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 5px;
+}
+
+.card {
+  height: 500px;
+  width: 350px;
+  margin: 0 auto;
+}
+
+#startCard {
+  width: 60%;
+  height: 60%;
+}
+
+#userName {
+  resize: none;
+}
+
 #userCardContainer,
 #cpuCardContainer {
   background: url("../images/cardback.png");
@@ -6,7 +80,6 @@
   background-position: center;
   padding: 10px;
   border: 15px solid var(--pkGolden);
-  min-width: 400px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -73,15 +146,15 @@
 }
 
 .cardImage {
-  min-width: 200px;
-  min-height: 200px;
+  width: 200px;
+  height: 200px;
   border: 1px solid var(--pkBostonRed)
 }
 
 .cardHeader {
   background: var(--pkGoldFoil);
   color: var(--pkCerulean);
-  min-width: 240px;
+  min-width: 220px;
   text-align: center;
 }
 

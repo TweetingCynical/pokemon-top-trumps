@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="./assets/css/styleJGS.css" />
+  <title>Pokemon Top Trumps</title>
+</head>
+
+<body>
+  <!-- Page header -->
+  <header class="p-2 mb-3">
+    <section class="col-lg-2 text-center hidden" id="scores">
+      <p>Score</p>
+      <p id="score">3</p>
+    </section>
+    <section class="col-lg-8 text-center" id="title">
+      <img src="./assets/images/logo.png" id="logo">
+      <h1>Top Trumps</h1>
+    </section>
+
+    <section class="col-lg-2 text-center hidden" id="rounds">
+      <p>Round</p>
+      <p id="round">4/5</p>
+    </section>
+  </header>
+
+  <!-- Initial card with instructions and start game button -->
+  <div class="card" id="startCard">
+    <img class="card-img-top" src="./assets/images/start.png" alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Are you ready to enter the world of Pokemon Top Trumps?</h5>
+      <form>
+        <div class="form-group">
+          <textarea class="form-control" id="userName" rows="1" placeholder="Enter your name here..."
+            required="true"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary startBtn">Start</button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- Playing cards section -->
+  <div class="cardZone row hidden">
+    <section id="userCard" class="col-xs-12 col-md-6"></section>
+    <section id="cpuCard" class="col-xs-12 col-md-6"></section>
+  </div>
+
+
+  <!-- Modal for caputuring Name -->
+
+  <!-- End game modal -->
+
+
+  <!-- Links to Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"
+    integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+"
+    crossorigin="anonymous"></script>
+  <script src="./assets/js/script.js"></script>
+  <script src="https://kit.fontawesome.com/2abc7a20f2.js" crossorigin="anonymous"></script>
+</body>
+
+
+</html>
