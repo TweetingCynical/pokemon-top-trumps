@@ -41,6 +41,9 @@
             required="true"></textarea>
         </div>
         <button type="submit" class="btn btn-primary startBtn">Start</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#instructions">
+          Instructions
+        </button>
       </form>
     </div>
   </div>
@@ -53,7 +56,23 @@
   </div>
 
 
-  <!-- Modal for caputuring Name -->
+  <!-- Modal for instructions -->
+  <div class="modal fade" id="instructions" tabindex="-1" role="dialog" aria-labelledby="instructionsCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="instructionsLongTitle">Instructions</h5>
+        </div>
+        <div class="modal-body">
+          What are we putting here to give the user instructions on how to play top trumps?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- End game modal -->
 
