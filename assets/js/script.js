@@ -134,6 +134,14 @@ function showCPUCard() {
   $("#cpuCardImage").removeClass("hidden");
   $(".cpuCardBtn").removeClass("hidden");
 }
+
+// Start game button
+$("#startCard").submit(function (event) {
+  event.preventDefault();
+  let userName = $("#userName").val();
+  $("#startCard").addClass("hidden");
+  $(".cardZone").removeClass("hidden");
+});
 // Fill cards with data >>> Show values for user, hide values for cpu
 
 // Enable onclick events for both cards, which highlights the selected attribute on both cards, then reveals cpu attributes
