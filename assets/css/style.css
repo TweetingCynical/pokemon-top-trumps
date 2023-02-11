@@ -11,27 +11,30 @@
 }
 
 body {
-  background-color: #3B4CCA;
+  background-color: var(--pkCerulean);
 }
 
 h1 {
   font-size: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 60px;
+  justify-content: center;
+  margin-left: 90px;
 }
 #scores {
   justify-content: center;
 }
 .border {
-  margin-left: 120px;
-  margin-right: 20px;
+  /* margin-left: 120px; */
+  margin-right: 300px;
+  width: 200px;
 }
 
 
-.container {
+/* .container {
   width: 80px;
   margin-left: auto;
   margin-right: auto;
-}
+} */
 
 .card {
   width: 200px;
@@ -49,30 +52,41 @@ h1 {
 #score {
   margin-left: 50px;
   justify-content: center;
+  width: 200;
 }
 
 .scores-text {
   margin: 0;
   font-size: 40px;
   text-align: center;
+  width: 100px;
+  color: white;
 }
 
 .game-round {
   border: 2px solid #CC0000;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   min-width: 10px;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   min-height: 100px;
+  position: relative;
+  bottom: 100px;
 }
 
 .rounds-text {
   margin: 0;
   font-size: 40px;
   text-align: center;
+  color: white;
 }
 #rounds {
-  margin-left: 70px;
-  justify-content: center
+  margin-left: 1200px;
+  margin-bottom: 50px;
+  /* margin-top: 90px; */
+
+  justify-content: space-around;
+  width: 200px;
+  
 }
 
 #start-button {
