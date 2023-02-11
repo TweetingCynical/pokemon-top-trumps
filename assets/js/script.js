@@ -140,12 +140,20 @@ function showCPUCard() {
   $("#cpuCardName").removeClass("hidden");
   $("#cpuCardImage").removeClass("hidden");
   $(".cpuCardBtn").removeClass("hidden");
+  $("#cpuCardContainer").addClass("flipped");
+  setTimeout(function () {
+    $("#cpuCardContainer").removeClass("flipped");
+  }, 1000);
 }
 
 function hideCPUCard() {
   $("#cpuCardName").addClass("hidden");
   $("#cpuCardImage").addClass("hidden");
   $(".cpuCardBtn").addClass("hidden");
+  $("#cpuCardContainer").addClass("flipped");
+  setTimeout(function () {
+    $("#cpuCardContainer").removeClass("flipped");
+  }, 1000);
 }
 
 // Check if userName is already in localStorage
