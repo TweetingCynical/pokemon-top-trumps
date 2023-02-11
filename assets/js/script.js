@@ -10,7 +10,7 @@ const giphyAPIKey = "L4a6rTsWCnxGkYAUqy5uKBSXdxkTX4ue";
 const abilityOptions = ["HP", "Attack", "Defense", "Speed"];
 let userCardData = [];
 let cpuCardData = [];
-let round = 0;
+let roundNum = 0;
 let score = 0;
 
 // Function to be used for fetching data from Pokemon API
@@ -172,7 +172,7 @@ $("#startCard").submit(function (event) {
   $(".cardZone").removeClass("hidden");
   $("#scores").removeClass("hidden");
   $("#rounds").removeClass("hidden");
-  fillCardData(round);
+  fillCardData(roundNum);
 });
 
 // Clear button to remove username from localStorage
@@ -190,17 +190,17 @@ function fillCardData(round) {
   $("#userCardImage").attr("src", userCardData[round].Image);
   $("#cpuCardImage").attr("src", cpuCardData[round].Image);
   // HP
-  $("#userCardHPValue").text(userCardData[round].HP);
-  $("#cpuCardHPValue").text(cpuCardData[round].HP);
+  $(".userCardHPValue").text(userCardData[round].HP);
+  $(".cpuCardHPValue").text(cpuCardData[round].HP);
   // Attack
-  $("#userCardAttackValue").text(userCardData[round].Attack);
-  $("#cpuCardAttackValue").text(cpuCardData[round].Attack);
+  $(".userCardAttackValue").text(userCardData[round].Attack);
+  $(".cpuCardAttackValue").text(cpuCardData[round].Attack);
   // Defense
-  $("#userCardDefenseValue").text(userCardData[round].Defense);
-  $("#cpuCardDefenseValue").text(cpuCardData[round].Defense);
+  $(".userCardDefenseValue").text(userCardData[round].Defense);
+  $(".cpuCardDefenseValue").text(cpuCardData[round].Defense);
   // Speed
-  $("#userCardSpeedValue").text(userCardData[round].Speed);
-  $("#cpuCardSpeedValue").text(cpuCardData[round].Speed);
+  $(".userCardSpeedValue").text(userCardData[round].Speed);
+  $(".cpuCardSpeedValue").text(cpuCardData[round].Speed);
 }
 
 // Game logic for deciding if user wins, update scores, update rounds, store both to localStorage
@@ -222,6 +222,7 @@ function userChoiceEvent(elementID, buttonClass) {
     let userChoice = $(this).attr("data-choice");
     showCPUCard();
     $(document).find($(buttonClass)).parent().parent().addClass("selected");
+    checkWinState(userChoice, roundNum);
     return userChoice;
   });
 }
