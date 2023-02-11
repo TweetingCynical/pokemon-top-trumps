@@ -213,3 +213,8 @@ body {
     background-position: 200% 0;
   }
 }
+
+.flipped {
+  transform: rotateY(360deg);
+  transition: transform 1s ease-in-out;
+}

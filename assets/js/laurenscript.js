@@ -68,7 +68,7 @@ function checkRoundState(userChoice, winState, userCardTotal, cpuCardTotal) {
 
 // Decide which modal to display
 function nextRound() {
-  $(".nextRound").on("click", function () {
+  $(".nextRound, #afterRound").on("click hide.bs.modal", function () {
     if (roundNum < 5) {
       resetButtons();
       fillCardData(roundNum);
