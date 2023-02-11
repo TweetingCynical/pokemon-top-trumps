@@ -209,24 +209,6 @@ function fillCardData(round) {
   $(".cpuCardSpeedValue").text(cpuCardData[round].Speed);
 }
 
-// Game logic for deciding if user wins, update scores, update rounds, store both to localStorage
-function nextRound(userChoice, userCardTotal, cpuCardTotal) {
-  if (roundNum < 5) {
-    $(".nextRound").on("click", function () {
-      resetButtons();
-      fillCardData(roundNum);
-      hideCPUCard();
-    });
-  } else {
-    $(".nextRound").text("Review");
-    $(".nextRound").on("click", function () {
-      resetButtons();
-      fillCardData(roundNum);
-      hideCPUCard();
-    });
-  }
-}
-
 // Remove green styling from the category the user chose
 function resetButtons() {
   $(".cardAbilityBtn").removeClass("selected");

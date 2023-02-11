@@ -45,26 +45,37 @@ function checkWinState(userChoice) {
 
 // Decide if moving to the next round:
 function checkRoundState(userChoice, winState, userCardTotal, cpuCardTotal) {
-  if (roundNum < 6) {
-    // Display correct message on the modal
-    if (winState === 1) {
-      $("#afterRoundLongTitle").text("YOU WIN");
-      $("#afterRoundMessage").text(
-        `Congratulations, you won round ${roundNum}`
-      );
-    } else if (winState === 2) {
-      $("#afterRoundLongTitle").text("TECHNICALITY WIN");
-      $("#afterRoundMessage").text(
-        `You chose ${userChoice} which had the same score as your opponent. The Total score of your card was higher, so you won round ${roundNum}`
-      );
-    } else {
-      $("#afterRoundLongTitle").text("YOU LOSE");
-      $("#afterRoundMessage").text(`Unlucky, you lost round ${roundNum}`);
-    }
-    // Call modal for next round prompt
-    $("#afterRound").modal({ show: true });
-    nextRound(userChoice, userCardTotal, cpuCardTotal);
+  // Display correct message on the modal
+  if (winState === 1) {
+    $("#afterRoundLongTitle").text("YOU WIN");
+    $("#afterRoundMessage").text(`Congratulations, you won round ${roundNum}`);
+  } else if (winState === 2) {
+    $("#afterRoundLongTitle").text("TECHNICALITY WIN");
+    $("#afterRoundMessage").text(
+      `You chose ${userChoice} which had the same score as your opponent. The Total score of your card was higher, so you won round ${roundNum}`
+    );
   } else {
-    // LAUREN TO INSERT FUNCTION WHICH CALLS HER MODAL TO END GAME HERE
+    $("#afterRoundLongTitle").text("YOU LOSE");
+    $("#afterRoundMessage").text(`Unlucky, you lost round ${roundNum}`);
   }
+  // Call modal for next round prompt
+  $("#afterRound").modal({ show: true });
+  if (roundNum === 5) {
+    $(".nextRound").text("Review");
+  }
+  nextRound();
+}
+
+// Decide which modal to display
+function nextRound() {
+  $(".nextRound").on("click", function () {
+    if (roundNum < 5) {
+      resetButtons();
+      fillCardData(roundNum);
+      hideCPUCard();
+    } else {
+      resetButtons();
+      $("#finalRound").modal({ show: true });
+    }
+  });
 }
