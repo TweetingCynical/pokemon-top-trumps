@@ -34,13 +34,14 @@
   <div class="card shadows" id="startCard">
     <img class="card-img-top" src="./assets/images/start.png" alt="Card image cap">
     <div class="card-body">
-      <h5 class="card-title">Are you ready to enter the world of Pokemon Top Trumps?</h5>
+      <h5 class="card-title" id="startTitle">Are you ready to enter the world of Pokemon Top Trumps?</h5>
       <form>
         <div class="form-group">
           <textarea class="form-control" id="userName" rows="1" placeholder="Enter your name here..."
             required="true"></textarea>
         </div>
         <button type="submit" class="btn btn-primary startBtn">Start</button>
+        <button type="button" class="btn btn-primary hidden clearBtn">Clear Username</button>
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#instructions">
           Instructions
         </button>
@@ -51,8 +52,12 @@
 
   <!-- Playing cards section -->
   <div class="cardZone row hidden">
-    <section id="userCard" class="col-xs-12 col-md-6"></section>
-    <section id="cpuCard" class="col-xs-12 col-md-6"></section>
+    <section id="userCard" class="col-xs-12 col-md-6">
+      <h2 class="text-center text-white" id="userNameCard">Your card</h2>
+    </section>
+    <section id="cpuCard" class="col-xs-12 col-md-6">
+      <h2 class="text-center text-white" id="userNameCard">Opponent's card</h2>
+    </section>
   </div>
 
 

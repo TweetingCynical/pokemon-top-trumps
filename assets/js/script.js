@@ -1,14 +1,17 @@
 // jQuery links to html elements
 const userCard = $("#userCard");
 const cpuCard = $("#cpuCard");
+const clearBtn = $(".btn-clear");
 
 // Set intial global variables needed for accessing data
 const partURL = "https://pokeapi.co/api/v2/pokemon/";
 const partGiphyURL = "https://api.giphy.com/v1/gifs/search";
 const giphyAPIKey = "L4a6rTsWCnxGkYAUqy5uKBSXdxkTX4ue";
+const abilityOptions = ["HP", "Attack", "Defense", "Speed"];
 let userCardData = [];
 let cpuCardData = [];
-const abilityOptions = ["HP", "Attack", "Defense", "Speed"];
+let round = 0;
+let score = 0;
 
 // Function to be used for fetching data from Pokemon API
 function getPokemonData(whoseCardData) {
@@ -138,15 +141,43 @@ function showCPUCard() {
   $(".cpuCardBtn").removeClass("hidden");
 }
 
+// Check if userName is already in localStorage
+function checkLocalStorage() {
+  // Get existing local storage of userName and parse back
+  let storedUserName = JSON.parse(localStorage.getItem("userName"));
+
+  // If stored array is not empty, set userName variable to local stored value
+  if (storedUserName !== null) {
+    userName = storedUserName;
+    $("#userName").val(userName);
+    $("#startTitle").text("Welcome Back");
+    $(".clearBtn").removeClass("hidden");
+  } else {
+    $("#userName").val("");
+    $("#startTitle").text(
+      "Are you ready to enter the world of Pokemon Top Trumps?"
+    );
+    $(".clearBtn").addClass("hidden");
+  }
+}
+
 // Start game button
 $("#startCard").submit(function (event) {
   event.preventDefault();
   let userName = $("#userName").val();
+  localStorage.setItem("userName", JSON.stringify(userName));
+  $("#userNameCard").text(`${userName}'s Card`);
   $("#startCard").addClass("hidden");
   $(".cardZone").removeClass("hidden");
   $("#scores").removeClass("hidden");
   $("#rounds").removeClass("hidden");
-  fillCardData(0);
+  fillCardData(round);
+});
+
+// Clear button to remove username from localStorage
+$(".clearBtn").click(function () {
+  localStorage.clear();
+  checkLocalStorage();
 });
 
 // Fill cards with data >>> Show values for user
@@ -189,3 +220,4 @@ createCardElements("userCard");
 createCardElements("cpuCard");
 getPokemonData(userCardData);
 getPokemonData(cpuCardData);
+checkLocalStorage();
