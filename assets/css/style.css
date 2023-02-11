@@ -5,9 +5,15 @@
   --pkGolden: #FFDE00;
   --pkGoldFoil: #B3A125;
 }
+
 * {
   margin: 0;
   padding: 0;
+}
+
+html {
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 body {
@@ -20,9 +26,11 @@ h1 {
   justify-content: center;
   margin-left: 90px;
 }
+
 #scores {
   justify-content: center;
 }
+
 .border {
   /* margin-left: 120px; */
   margin-right: 300px;
@@ -40,6 +48,7 @@ h1 {
   width: 200px;
   height: 500px;
 }
+
 #user-card {
   display: flex;
   justify-content: space-around;
@@ -79,6 +88,7 @@ h1 {
   text-align: center;
   color: white;
 }
+
 #rounds {
   margin-left: 1200px;
   margin-bottom: 50px;
@@ -86,16 +96,16 @@ h1 {
 
   justify-content: space-around;
   width: 200px;
-  
+
 }
 
 #start-button {
-width: 500PX;
-height: 80px;
-margin: 50PX;
-font-size: 30PX;
-font-weight: 30PX;
-padding-top: 5PX;
+  width: 500PX;
+  height: 80px;
+  margin: 50PX;
+  font-size: 30PX;
+  font-weight: 30PX;
+  padding-top: 5PX;
 
 }
 
@@ -108,5 +118,3 @@ padding-top: 5PX;
   display: flex;
   padding: 80px;
 }
-
-

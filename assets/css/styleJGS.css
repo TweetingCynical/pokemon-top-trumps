@@ -1,8 +1,3 @@
-html {
-  max-width: 1280px;
-  margin: 0 auto;
-}
-
 #userCardContainer,
 #cpuCardContainer {
   background: url("../images/cardback.png");
