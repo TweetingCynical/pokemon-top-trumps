@@ -54,7 +54,17 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  padding: 5px;
+  align-items: center;
+  color: var(--pkBostonRed);
+  border: 2px solid var(--pkBostonRed);
+  background-color: var(--pkGolden);
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
+}
+
+#scores p,
+#rounds p {
+  margin-bottom: 0;
 }
 
 .card {
@@ -147,14 +157,18 @@ body {
 }
 
 .cardImage {
+  margin: 5px;
   width: 200px;
   height: 200px;
-  border: 1px solid var(--pkBostonRed)
+  border: 1px solid var(--pkCerulean);
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
 }
 
 .cardHeader {
   background: var(--pkGoldFoil);
   color: var(--pkCerulean);
+  border: 2px solid var(--pkCerulean);
   min-width: 220px;
   text-align: center;
 }
@@ -163,4 +177,25 @@ body {
   background: forestgreen;
   transform: scale(1.05);
   transform-origin: center;
+}
+
+.shadows {
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
+}
+
+.shimmer {
+  background: linear-gradient(to right, var(--pkGoldFoil) 0%, var(--pkGolden) 25%, var(--pkGoldFoil) 50%, var(--pkGolden) 75%, var(--pkGoldFoil) 100%);
+  background-size: 400% 100%;
+  animation: shimmer 20s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
 }

@@ -80,17 +80,19 @@ function randomOption() {
 function createCardElements(whoseCard) {
   const whoseCardEl = $(`#${whoseCard}`);
   const cardEl = $("<div>")
-    .addClass("card shadow-lg p-3 mb-5 rounded")
+    .addClass("card shadows p-3 mb-5 rounded")
     .attr("id", `${whoseCard}Container`);
   const nameEl = $("<h3>")
-    .addClass("cardHeader shadow-lg rounded p-1 hidden")
+    .addClass("cardHeader shadows rounded p-1 hidden")
     .attr("id", `${whoseCard}Name`)
     .text("Character");
   const imgEl = $("<img>")
-    .addClass("cardImage shadow-lg rounded bg-white hidden")
+    .addClass("cardImage shadows rounded bg-white hidden shimmer")
     .attr("id", `${whoseCard}Image`)
     .attr("alt", "pokemon character shiny image");
   cardEl.append(nameEl, imgEl);
+
+  // Create buttons
   for (let i = 0; i < 4; i++) {
     const abilityBtn = $("<button>")
       .addClass(
@@ -129,6 +131,7 @@ $("#userCard").on("click", ".userCardBtn", function () {
   return console.log(userChoice);
 });
 
+// Show cpu card details after user has made a choice
 function showCPUCard() {
   $("#cpuCardName").removeClass("hidden");
   $("#cpuCardImage").removeClass("hidden");
@@ -143,8 +146,35 @@ $("#startCard").submit(function (event) {
   $(".cardZone").removeClass("hidden");
   $("#scores").removeClass("hidden");
   $("#rounds").removeClass("hidden");
+  fillCardData(0);
 });
-// Fill cards with data >>> Show values for user, hide values for cpu
+
+// Fill cards with data >>> Show values for user
+function fillCardData(round) {
+  // Names
+  $("#userCardName").text(userCardData[round][0]);
+  $("#cpuCardName").text(cpuCardData[round][0]);
+
+  // Images
+  $("#userCardImage").attr("src", userCardData[round][5]);
+  $("#cpuCardImage").attr("src", cpuCardData[round][5]);
+
+  // HP
+  $("#userCardHPValue").text(userCardData[round][1]);
+  $("#cpuCardHPValue").text(cpuCardData[round][1]);
+
+  // Attack
+  $("#userCardAttackValue").text(userCardData[round][2]);
+  $("#cpuCardAttackValue").text(cpuCardData[round][2]);
+
+  // Defense
+  $("#userCardDefenseValue").text(userCardData[round][3]);
+  $("#cpuCardDefenseValue").text(cpuCardData[round][3]);
+
+  // Speed
+  $("#userCardSpeedValue").text(userCardData[round][4]);
+  $("#cpuCardSpeedValue").text(cpuCardData[round][4]);
+}
 
 // Enable onclick events for both cards, which highlights the selected attribute on both cards, then reveals cpu attributes
 
