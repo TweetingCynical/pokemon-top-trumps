@@ -185,29 +185,22 @@ function fillCardData(round) {
   // Names
   $("#userCardName").text(userCardData[round][0]);
   $("#cpuCardName").text(cpuCardData[round][0]);
-
   // Images
   $("#userCardImage").attr("src", userCardData[round][5]);
   $("#cpuCardImage").attr("src", cpuCardData[round][5]);
-
   // HP
   $("#userCardHPValue").text(userCardData[round][1]);
   $("#cpuCardHPValue").text(cpuCardData[round][1]);
-
   // Attack
   $("#userCardAttackValue").text(userCardData[round][2]);
   $("#cpuCardAttackValue").text(cpuCardData[round][2]);
-
   // Defense
   $("#userCardDefenseValue").text(userCardData[round][3]);
   $("#cpuCardDefenseValue").text(cpuCardData[round][3]);
-
   // Speed
   $("#userCardSpeedValue").text(userCardData[round][4]);
   $("#cpuCardSpeedValue").text(cpuCardData[round][4]);
 }
-
-// Enable onclick events for both cards, which highlights the selected attribute on both cards, then reveals cpu attributes
 
 // Game logic for deciding if user wins, update scores, update rounds, store both to localStorage
 
