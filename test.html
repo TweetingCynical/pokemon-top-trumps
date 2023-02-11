@@ -52,9 +52,31 @@
 
   <!-- Playing cards section -->
   <div class="cardZone row hidden">
+
+    <!-- User card section -->
     <section id="userCard" class="col-xs-12 col-md-6">
       <h2 class="text-center text-white" id="userNameCard">Your card</h2>
     </section>
+
+    <!-- Modal after each round for triggering next round-->
+    <div class="modal fade" id="afterRound" tabindex="-1" role="dialog" aria-labelledby="afterRoundCenterTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="afterRoundLongTitle">WIN STATE</h5>
+          </div>
+          <div class="modal-body">
+            Congratulions / Commiserations - Your card was better / worse
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary nextRound" data-dismiss="modal">Next Round</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- cpuCard section -->
     <section id="cpuCard" class="col-xs-12 col-md-6">
       <h2 class="text-center text-white" id="userNameCard">Opponent's card</h2>
     </section>

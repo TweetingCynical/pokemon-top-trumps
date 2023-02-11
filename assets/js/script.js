@@ -204,6 +204,17 @@ function fillCardData(round) {
 }
 
 // Game logic for deciding if user wins, update scores, update rounds, store both to localStorage
+function nextRound(userChoice, roundNum, userCardTotal, cpuCardTotal) {
+  $(".nextRound").on("click", function () {
+    resetButtons();
+    fillCardData(roundNum);
+  });
+}
+
+// Remove green styling from the category the user chose
+function resetButtons() {
+  $(".cardAbilityBtn").removeClass("selected");
+}
 
 // End game logic showing giphy for win/loss
 
@@ -223,7 +234,7 @@ function userChoiceEvent(elementID, buttonClass) {
     showCPUCard();
     $(document).find($(buttonClass)).parent().parent().addClass("selected");
     checkWinState(userChoice, roundNum);
-    return userChoice;
+    return userChoice
   });
 }
 
