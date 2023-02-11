@@ -141,6 +141,8 @@ $("#startCard").submit(function (event) {
   let userName = $("#userName").val();
   $("#startCard").addClass("hidden");
   $(".cardZone").removeClass("hidden");
+  $("#scores").removeClass("hidden");
+  $("#rounds").removeClass("hidden");
 });
 // Fill cards with data >>> Show values for user, hide values for cpu
 
