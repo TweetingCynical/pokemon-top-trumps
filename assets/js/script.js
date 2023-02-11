@@ -142,6 +142,12 @@ function showCPUCard() {
   $(".cpuCardBtn").removeClass("hidden");
 }
 
+function hideCPUCard() {
+  $("#cpuCardName").addClass("hidden");
+  $("#cpuCardImage").addClass("hidden");
+  $(".cpuCardBtn").addClass("hidden");
+}
+
 // Check if userName is already in localStorage
 function checkLocalStorage() {
   // Get existing local storage of userName and parse back
@@ -204,6 +210,27 @@ function fillCardData(round) {
 }
 
 // Game logic for deciding if user wins, update scores, update rounds, store both to localStorage
+function nextRound(userChoice, userCardTotal, cpuCardTotal) {
+  if (roundNum < 5) {
+    $(".nextRound").on("click", function () {
+      resetButtons();
+      fillCardData(roundNum);
+      hideCPUCard();
+    });
+  } else {
+    $(".nextRound").text("Review");
+    $(".nextRound").on("click", function () {
+      resetButtons();
+      fillCardData(roundNum);
+      hideCPUCard();
+    });
+  }
+}
+
+// Remove green styling from the category the user chose
+function resetButtons() {
+  $(".cardAbilityBtn").removeClass("selected");
+}
 
 // End game logic showing giphy for win/loss
 
@@ -222,7 +249,7 @@ function userChoiceEvent(elementID, buttonClass) {
     let userChoice = $(this).attr("data-choice");
     showCPUCard();
     $(document).find($(buttonClass)).parent().parent().addClass("selected");
-    checkWinState(userChoice, roundNum);
+    checkWinState(userChoice);
     return userChoice;
   });
 }
