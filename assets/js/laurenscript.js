@@ -1,3 +1,9 @@
+// function checkWinState(userChoice, round) {
+//   if userCardData[round][userchoice] > cpuCardData[round][userChoice]
+// }
+
+
+
 // 9. Start a loop to play the game:
 
 let userCardData = [];

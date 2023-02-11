@@ -124,36 +124,50 @@ body {
   align-items: center;
 }
 
-#userCardHPBtn,
-#cpuCardHPBtn {
+.userCardHPBtn,
+.cpuCardHPBtn {
   background-color: var(--pkBostonRed);
 }
 
-#userCardAttackBtn,
-#cpuCardAttackBtn {
+.userCardAttackBtn,
+.cpuCardAttackBtn {
   background-color: var(--pkGolden);
 }
 
-#userCardDefenseBtn,
-#cpuCardDefenseBtn {
+.userCardDefenseBtn,
+.cpuCardDefenseBtn {
   background-color: var(--pkCerulean);
 }
 
-#userCardSpeedBtn,
-#cpuCardSpeedBtn {
+.userCardSpeedBtn,
+.cpuCardSpeedBtn {
   background-color: var(--pkGoldFoil);
 }
 
-#userCardHPBtn:hover,
-#cpuCardHPBtn:hover,
-#userCardAttackBtn:hover,
-#cpuCardAttackBtn:hover,
-#userCardDefenseBtn:hover,
-#cpuCardDefenseBtn:hover,
-#userCardSpeedBtn:hover,
-#cpuCardSpeedBtn:hover {
+.userCardHPBtn,
+.cpuCardHPBtn,
+.userCardAttackBtn,
+.cpuCardAttackBtn,
+.userCardDefenseBtn,
+.cpuCardDefenseBtn,
+.userCardSpeedBtn,
+.cpuCardSpeedBtn {
+  color: white;
+  border: 1px solid var(--pkCerulean);
+}
+
+
+.userCardHPBtn:hover,
+.cpuCardHPBtn:hover,
+.userCardAttackBtn:hover,
+.cpuCardAttackBtn:hover,
+.userCardDefenseBtn:hover,
+.cpuCardDefenseBtn:hover,
+.userCardSpeedBtn:hover,
+.cpuCardSpeedBtn:hover {
   transform: scale(1.05);
   transform-origin: center;
+  color: white;
 }
 
 .cardImage {
@@ -173,7 +187,7 @@ body {
   text-align: center;
 }
 
-#selected {
+.selected {
   background: forestgreen;
   transform: scale(1.05);
   transform-origin: center;

@@ -33,20 +33,20 @@ function getPokemonData(whoseCardData) {
   // Get all promises data and store the pokemon information we need for game data
   Promise.all(promises).then((data) => {
     for (let i = 0; i < data.length; i++) {
-      whoseCardData.push([
+      whoseCardData.push({
         // Pokemon name
-        data[i].name,
+        pkName: data[i].name,
         // HP
-        data[i].stats[0]["base_stat"],
+        HP: data[i].stats[0]["base_stat"],
         // Attack
-        data[i].stats[1]["base_stat"],
+        Attack: data[i].stats[1]["base_stat"],
         // Defense
-        data[i].stats[2]["base_stat"],
+        Defense: data[i].stats[2]["base_stat"],
         // Speed
-        data[i].stats[5]["base_stat"],
+        Speed: data[i].stats[5]["base_stat"],
         // Pokemon image
-        data[i].sprites.other["official-artwork"].front_shiny,
-      ]);
+        Image: data[i].sprites.other["official-artwork"].front_shiny,
+      });
     }
   });
 }
@@ -99,9 +99,10 @@ function createCardElements(whoseCard) {
   for (let i = 0; i < 4; i++) {
     const abilityBtn = $("<button>")
       .addClass(
-        `cardAbilityBtn ${whoseCard}Btn btn btn-primary shadow-lg hidden`
+        `cardAbilityBtn ${whoseCard}Btn btn shadow-lg hidden ${whoseCard}${abilityOptions[i]}Btn`
       )
       .attr("id", `${whoseCard}${abilityOptions[i]}Btn`)
+      .attr("data-choice", abilityOptions[i])
       .attr("type", "button");
     const abilityDiv = $("<div>")
       .addClass("cardAbility")
@@ -110,8 +111,8 @@ function createCardElements(whoseCard) {
       .attr("id", `${whoseCard}${abilityOptions[i]}Title`)
       .text(`${abilityOptions[i]}`);
     const abilityValue = $("<p>")
-      .addClass(`${abilityOptions[i]}`)
-      .attr("id", `${whoseCard}${abilityOptions[i]}Value`)
+      .addClass(`${abilityOptions[i]} ${whoseCard}${abilityOptions[i]}Value`)
+      .attr("id", `${abilityOptions[i]}`)
       .text("TestDIV");
     cardEl.append(
       abilityBtn.append(abilityDiv.append(abilityTitle, abilityValue))
@@ -126,13 +127,13 @@ function createCardElements(whoseCard) {
 }
 
 // Add event listener for userCardBtn
-$("#userCard").on("click", ".userCardBtn", function () {
-  // NOTE: This is NOT ready yet. Just an experiment for how to handle the visual change
-  let userChoice = $(this).find("p[id$='Value']").attr("class");
-  showCPUCard();
-  $(`.${userChoice}`).parent().parent().attr("id", "selected");
-  return console.log(userChoice);
-});
+// $("#userCard").on("click", ".userCardBtn", function () {
+//   // NOTE: This is NOT ready yet. Just an experiment for how to handle the visual change
+//   let userChoice = $(this).find("p[id$='Value']").attr("class");
+//   showCPUCard();
+//   $(`.${userChoice}`).parent().parent().addClass("selected");
+//   return console.log(userChoice);
+// });
 
 // Show cpu card details after user has made a choice
 function showCPUCard() {
@@ -183,23 +184,23 @@ $(".clearBtn").click(function () {
 // Fill cards with data >>> Show values for user
 function fillCardData(round) {
   // Names
-  $("#userCardName").text(userCardData[round][0]);
-  $("#cpuCardName").text(cpuCardData[round][0]);
+  $("#userCardName").text(userCardData[round].pkName);
+  $("#cpuCardName").text(cpuCardData[round].pkName);
   // Images
-  $("#userCardImage").attr("src", userCardData[round][5]);
-  $("#cpuCardImage").attr("src", cpuCardData[round][5]);
+  $("#userCardImage").attr("src", userCardData[round].Image);
+  $("#cpuCardImage").attr("src", cpuCardData[round].Image);
   // HP
-  $("#userCardHPValue").text(userCardData[round][1]);
-  $("#cpuCardHPValue").text(cpuCardData[round][1]);
+  $("#userCardHPValue").text(userCardData[round].HP);
+  $("#cpuCardHPValue").text(cpuCardData[round].HP);
   // Attack
-  $("#userCardAttackValue").text(userCardData[round][2]);
-  $("#cpuCardAttackValue").text(cpuCardData[round][2]);
+  $("#userCardAttackValue").text(userCardData[round].Attack);
+  $("#cpuCardAttackValue").text(cpuCardData[round].Attack);
   // Defense
-  $("#userCardDefenseValue").text(userCardData[round][3]);
-  $("#cpuCardDefenseValue").text(cpuCardData[round][3]);
+  $("#userCardDefenseValue").text(userCardData[round].Defense);
+  $("#cpuCardDefenseValue").text(cpuCardData[round].Defense);
   // Speed
-  $("#userCardSpeedValue").text(userCardData[round][4]);
-  $("#cpuCardSpeedValue").text(cpuCardData[round][4]);
+  $("#userCardSpeedValue").text(userCardData[round].Speed);
+  $("#cpuCardSpeedValue").text(cpuCardData[round].Speed);
 }
 
 // Game logic for deciding if user wins, update scores, update rounds, store both to localStorage
@@ -214,3 +215,19 @@ createCardElements("cpuCard");
 getPokemonData(userCardData);
 getPokemonData(cpuCardData);
 checkLocalStorage();
+
+// Click events for each of the user's card options
+function userChoiceEvent(elementID, buttonClass) {
+  $(elementID).on("click", function () {
+    let userChoice = $(this).attr("data-choice");
+    showCPUCard();
+    $(document).find($(buttonClass)).parent().parent().addClass("selected");
+    return userChoice;
+  });
+}
+
+// Call of button click events
+userChoiceEvent("#userCardHPBtn", ".HP");
+userChoiceEvent("#userCardAttackBtn", ".Attack");
+userChoiceEvent("#userCardDefenseBtn", ".Defense");
+userChoiceEvent("#userCardSpeedBtn", ".Speed");
