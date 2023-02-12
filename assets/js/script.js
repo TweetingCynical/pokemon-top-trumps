@@ -53,15 +53,21 @@ function getPokemonData(whoseCardData) {
 
 // Function for getting a random GIPHY image
 function getGiphyData(state) {
-  const fullGiphyURL = `${partGiphyURL}?q=${state}&api_key=${giphyAPIKey}&limit=10`;
+  // const fullGiphyURL = `${partGiphyURL}?q=${state}&api_key=${giphyAPIKey}&limit=10`;
 
-  // Data fetch
-  $.ajax({
-    url: fullGiphyURL,
-    method: "GET",
-  }).then(function (data) {
-    return;
-  });
+  // // Data fetch
+  // $.ajax({
+  //   url: fullGiphyURL,
+  //   method: "GET",
+  // }).then(function (data) {
+  //   console.log(data)
+  //   return data;
+  // });
+  const dataa  = fetch(`${partGiphyURL}?q=${state}&api_key=${giphyAPIKey}&limit=10`)
+  .then((response) => response.json())
+  .then((data) => data);
+
+  return dataa
 }
 
 // Get a random number for referencing a character choice from dataOptions
@@ -175,6 +181,34 @@ function checkLocalStorage() {
     $(".clearBtn").addClass("hidden");
   }
 }
+
+/////////////////////////////// BIT LAUREN ADDED IN 12TH FEB //////////////////////////////////
+
+
+    // Function to create elements for the win-state
+    function createWinStateElements(winGiphy) {
+      console.log('winFunc')
+      let storedUserName = JSON.parse(localStorage.getItem("userName"));
+      let userName = storedUserName;
+      let winHeader = $("<h3>").text("Congratulations!");
+      let winText = $("<h4>").text(`${userName}, you have won the game!`);
+      let winGif = $("<img>").attr("src", winGiphy.data[0].images.original.url);
+      $("#win-state").append(winHeader, winText, winGif);
+    }
+
+    // Function to create elements for the lose-state
+    function createLoseStateElements(loseGiphy) {
+      console.log('loseFunc')
+
+      let storedUserName = JSON.parse(localStorage.getItem("userName"));
+      let userName = storedUserName;
+      let loseHeader = $("<h3>").text("Oh no!");
+      let loseText = $("<h4>").text(`${userName}, you have lost!`);
+      let loseGif = $("<img>").attr("src", loseGiphy.data[0].images.original.url);
+      $("#lose-state").append(loseHeader, loseText, loseGif);
+    }
+
+/////////////////////////////// BIT LAUREN ADDED IN 12TH FEB //////////////////////////////////
 
 // Start game button
 $("#startCard").submit(function (event) {

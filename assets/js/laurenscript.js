@@ -1,7 +1,3 @@
-// function checkWinState(userChoice, round) {
-//   if userCardData[roundNum][userchoice] > cpuCardData[round][userChoice]
-// }
-
 // 9. Start a loop to play the game:
 let userScore = 0;
 
@@ -48,15 +44,15 @@ function checkRoundState(userChoice, winState, userCardTotal, cpuCardTotal) {
   // Display correct message on the modal
   if (winState === 1) {
     $("#afterRoundLongTitle").text("YOU WIN");
-    $("#afterRoundMessage").text(`Congratulations, you won round ${roundNum}`);
+    $("#afterRoundMessage").text(`Congratulations, you won Round ${roundNum}`);
   } else if (winState === 2) {
     $("#afterRoundLongTitle").text("TECHNICALITY WIN");
     $("#afterRoundMessage").text(
-      `You chose ${userChoice} which had the same score as your opponent. The Total score of your card was higher, so you won round ${roundNum}`
+      `You chose ${userChoice} which had the same score as your opponent. The Total score of your card was higher, so you won Round ${roundNum}`
     );
   } else {
     $("#afterRoundLongTitle").text("YOU LOSE");
-    $("#afterRoundMessage").text(`Unlucky, you lost round ${roundNum}`);
+    $("#afterRoundMessage").text(`Unlucky, you lost Round ${roundNum}`);
   }
   // Call modal for next round prompt
   $("#afterRound").modal({ show: true });
@@ -74,8 +70,52 @@ function nextRound() {
       fillCardData(roundNum);
       hideCPUCard();
     } else {
+      console.log({roundNum})
       resetButtons();
-      $("#finalRound").modal({ show: true });
+      $("#afterRound").modal({ show: false });
+      checkFinalWinState()
     }
   });
 }
+
+// Final modal
+const finalModal = $('#finalModal');
+
+  // Then check if user has won or lost
+  async function checkFinalWinState() {
+    // End of round 5, show finalModal
+    if (roundNum === 5) {
+    finalModal.modal({ show: true });
+    // If user score more than 2 then get celebrate gif and call win state elements
+    if (userScore > 2) {
+      console.log("winState")
+      //const res = await getGiphyData();
+   const winGif = await getGiphyData("celebrate");
+   console.log({winGif})
+    //.then(function () {
+    createWinStateElements(winGif);
+    //});
+    // Else get thumbs-down gif and call lose state elements
+    } else {
+      console.log("loseState")
+    const loseGif = await getGiphyData("thumbs-down");
+    console.log({loseGif})
+    //.then(function () {
+    createLoseStateElements(loseGif);
+    //});
+    }
+      }
+        }
+
+// Reset game button
+$('#resetGame').click(function () {
+    // Reset roundNum and userScore
+    roundNum = 1;
+    userScore = 0;
+    // Update display
+    $("#roundNum").text(roundNum);
+    $("#userScore").text(userScore);
+  
+    // Hide finalModal
+    $("#finalModal").modal("hide");
+  });
