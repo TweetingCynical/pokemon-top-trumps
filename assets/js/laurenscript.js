@@ -49,13 +49,11 @@ function checkWinState(userChoice) {
 function nextRound() {
   $(".nextRound, #afterRound").on("click hide.bs.modal", function () {
     if (roundNum === 5) {
-      console.log({ roundNum });
       resetButtons();
       $("#afterRound").modal({ show: false });
       checkFinalWinState();
       return;
     } else {
-      console.log({roundNum})
       resetButtons();
       fillCardData(roundNum);
       hideCPUCard();
@@ -78,15 +76,14 @@ async function checkFinalWinState() {
       $("#lose-state").removeClass("hidden");
     }
     finalModal.modal({ show: true });
+    return;
   }
 }
 
 // Reset game button
 $("#resetGame").click(function () {
   // Reset user and cpu cards, roundNum and userScore
-  console.log(userCardData);
   userCardData = [];
-  console.log(userCardData);
   cpuCardData = [];
   roundNum = 0;
   userScore = 0;

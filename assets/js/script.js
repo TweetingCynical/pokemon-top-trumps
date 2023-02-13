@@ -177,7 +177,6 @@ function createWinStateElements(winGif) {
 
 function createLoseStateElements(loseGif) {
   getGiphyData(loseGif).then(function (data) {
-    console.log(data);
     let storedUserName = JSON.parse(localStorage.getItem("userName"));
     let userName = storedUserName;
     let loseHeader = $("<h3>").text("Oh no!");
@@ -193,6 +192,8 @@ $("#startCard").submit(function (event) {
   event.preventDefault();
   let userName = $("#userName").val();
   localStorage.setItem("userName", JSON.stringify(userName));
+  createWinStateElements("celebrate");
+  createLoseStateElements("thumbs-down");
   $("#userNameCard").text(`${userName}'s Card`);
   $("#startCard").addClass("hidden");
   $(".cardZone").removeClass("hidden");
@@ -269,15 +270,15 @@ function init() {
   createCardElements("cpuCard");
   getPokemonData(userCardData);
   getPokemonData(cpuCardData);
-  checkLocalStorage();
   // Call of button click events
   userChoiceEvent("#userCardHPBtn", ".HP");
   userChoiceEvent("#userCardAttackBtn", ".Attack");
   userChoiceEvent("#userCardDefenseBtn", ".Defense");
   userChoiceEvent("#userCardSpeedBtn", ".Speed");
   // Run these functions so that the cards are pre-created with data from the outset.
-  createWinStateElements("celebrate");
-  createLoseStateElements("thumbs-down");
+  // createWinStateElements("celebrate");
+  // createLoseStateElements("thumbs-down");
+  checkLocalStorage();
   // Show start screen
   $("#startCard").removeClass("hidden");
 }
