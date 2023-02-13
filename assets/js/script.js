@@ -77,19 +77,25 @@ function randomOption() {
 // Create cards in html
 function createCardElements(whoseCard) {
   const whoseCardEl = $(`#${whoseCard}`);
-  const cardEl = $("<div>")
-    .addClass("card shadows p-3 mb-5 rounded")
-    .attr("id", `${whoseCard}Container`);
-  const nameEl = $("<h3>")
-    .addClass("cardHeader shadows rounded p-1 hidden")
-    .attr("id", `${whoseCard}Name`)
-    .text("Character");
-  const imgEl = $("<img>")
-    .addClass("cardImage shadows rounded bg-white hidden shimmer")
-    .attr("id", `${whoseCard}Image`)
-    .attr("alt", "pokemon character shiny image");
-  cardEl.append(nameEl, imgEl);
-
+  // const cardEl = $("<div>")
+  //   .addClass("card shadows p-3 mb-5 rounded")
+  //   .attr("id", `${whoseCard}Container`);
+  // const nameEl = $("<h3>")
+  //   .addClass("cardHeader shadows rounded p-1 hidden")
+  //   .attr("id", `${whoseCard}Name`)
+  //   .text("Character");
+  // const imgEl = $("<img>")
+  //   .addClass("cardImage shadows rounded bg-white hidden shimmer")
+  //   .attr("id", `${whoseCard}Image`)
+  //   .attr("alt", "pokemon character shiny image");
+  // cardEl.append(nameEl, imgEl);
+  const cardEl = `
+  <div class="card shadows p-3 mb-5 rounded" id="${whoseCard}Container">
+    <h3 class="cardHeader shadows rounded p-1 hidden" id="${whoseCard}Name">Character</h3>
+    <img class="cardImage shadows rounded bg-white hidden shimmer" id="${whoseCard}Image" alt="pokemon character shiny image"/>
+  </div>  
+  `
+  whoseCardEl.append(cardEl);
   // Create buttons
   for (let i = 0; i < 4; i++) {
     const abilityBtn = $("<button>")
@@ -109,11 +115,11 @@ function createCardElements(whoseCard) {
       .addClass(`${abilityOptions[i]} ${whoseCard}${abilityOptions[i]}Value`)
       .attr("id", `${abilityOptions[i]}`)
       .text("TestDIV");
-    cardEl.append(
+    $(`#${whoseCard}Container`).append(
       abilityBtn.append(abilityDiv.append(abilityTitle, abilityValue))
     );
   }
-  whoseCardEl.append(cardEl);
+  // whoseCardEl.append(cardEl);
 
   // NOTE: This needs to be correctly placed later, but for now is being used to test:
   $("#userCardName").removeClass("hidden");
@@ -164,11 +170,10 @@ function checkLocalStorage() {
 
 function createWinStateElements(winGif) {
   getGiphyData(winGif).then(function (data) {
-    console.log(data);
-    let storedUserName = JSON.parse(localStorage.getItem("userName"));
-    let userName = storedUserName;
-    let winHeader = $("<h3>").text("Congratulations!");
-    let winText = $("<h4>").text(`${userName}, you have won the game!`);
+    const storedUserName = JSON.parse(localStorage.getItem("userName"));
+    const userName = storedUserName;
+    const winHeader = $("<h3>").text("Congratulations!");
+    const winText = $("<h4>").text(`${userName}, you have won the game!`);
     const winGifURL = data.data[0].images.original.url;
     const winGifImg = $("<img>").attr("src", winGifURL);
     $("#win-state").append(winHeader, winText, winGifImg);
@@ -177,10 +182,10 @@ function createWinStateElements(winGif) {
 
 function createLoseStateElements(loseGif) {
   getGiphyData(loseGif).then(function (data) {
-    let storedUserName = JSON.parse(localStorage.getItem("userName"));
-    let userName = storedUserName;
-    let loseHeader = $("<h3>").text("Oh no!");
-    let loseText = $("<h4>").text(`${userName}, you have lost!`);
+    const storedUserName = JSON.parse(localStorage.getItem("userName"));
+    const userName = storedUserName;
+    const loseHeader = $("<h3>").text("Oh no!");
+    const loseText = $("<h4>").text(`${userName}, you have lost!`);
     const loseGifURL = data.data[0].images.original.url;
     const loseGifImg = $("<img>").attr("src", loseGifURL);
     $("#lose-state").append(loseHeader, loseText, loseGifImg);
@@ -190,7 +195,7 @@ function createLoseStateElements(loseGif) {
 // Start game button
 $("#startCard").submit(function (event) {
   event.preventDefault();
-  let userName = $("#userName").val();
+  const userName = $("#userName").val();
   localStorage.setItem("userName", JSON.stringify(userName));
   createWinStateElements("celebrate");
   createLoseStateElements("thumbs-down");
