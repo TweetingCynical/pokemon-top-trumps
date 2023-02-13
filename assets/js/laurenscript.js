@@ -13,43 +13,38 @@ function checkWinState(userChoice) {
 
   if (userCardData[roundNum][userChoice] > cpuCardData[roundNum][userChoice]) {
     userScore++;
-    winState = 1;
+    $("#afterRoundLongTitle").text("YOU WIN");
+    $("#afterRoundMessage").text(
+      `Congratulations, you won Round ${roundNum + 1}`
+    );
   } else if (
     userCardData[roundNum][userChoice] === cpuCardData[roundNum][userChoice] &&
     userCardTotal > cpuCardTotal
   ) {
     userScore++;
     winState = 2;
+    $("#afterRoundLongTitle").text("TECHNICALITY WIN");
+    $("#afterRoundMessage").text(
+      `You chose ${userChoice} which had the same score as your opponent. The Total score of your card was higher, so you won Round ${
+        roundNum + 1
+      }`
+    );
+  } else {
+    $("#afterRoundLongTitle").text("YOU LOSE");
+    $("#afterRoundMessage").text(`Unlucky, you lost Round ${roundNum + 1}`);
   }
 
   roundNum++;
   document.getElementById("score").textContent = userScore;
   document.getElementById("round").textContent = `${roundNum}/5`;
-  checkRoundState(userChoice, winState, userCardTotal, cpuCardTotal);
-  return;
-}
 
-// Decide if moving to the next round:
-function checkRoundState(userChoice, winState, userCardTotal, cpuCardTotal) {
-  // Display correct message on the modal
-  if (winState === 1) {
-    $("#afterRoundLongTitle").text("YOU WIN");
-    $("#afterRoundMessage").text(`Congratulations, you won Round ${roundNum}`);
-  } else if (winState === 2) {
-    $("#afterRoundLongTitle").text("TECHNICALITY WIN");
-    $("#afterRoundMessage").text(
-      `You chose ${userChoice} which had the same score as your opponent. The Total score of your card was higher, so you won Round ${roundNum}`
-    );
-  } else {
-    $("#afterRoundLongTitle").text("YOU LOSE");
-    $("#afterRoundMessage").text(`Unlucky, you lost Round ${roundNum}`);
-  }
   // Call modal for next round prompt
   $("#afterRound").modal({ show: true });
   if (roundNum === 5) {
     $(".nextRound").text("Review");
   }
   nextRound();
+  return;
 }
 
 // Decide which modal to display
