@@ -51,6 +51,8 @@ function getPokemonData(whoseCardData) {
   });
 }
 
+/////////////////////////////// BIT LAUREN CHANGED 12TH FEB //////////////////////////////////
+
 // Function for getting a random GIPHY image
 function getGiphyData(state) {
   // const fullGiphyURL = `${partGiphyURL}?q=${state}&api_key=${giphyAPIKey}&limit=10`;
@@ -69,6 +71,8 @@ function getGiphyData(state) {
 
   return dataa
 }
+
+/////////////////////////////// BIT LAUREN CHANGED 12TH FEB //////////////////////////////////
 
 // Get a random number for referencing a character choice from dataOptions
 function randomOption() {

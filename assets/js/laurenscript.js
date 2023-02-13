@@ -88,21 +88,13 @@ const finalModal = $('#finalModal');
     finalModal.modal({ show: true });
     // If user score more than 2 then get celebrate gif and call win state elements
     if (userScore > 2) {
-      console.log("winState")
-      //const res = await getGiphyData();
    const winGif = await getGiphyData("celebrate");
-   console.log({winGif})
-    //.then(function () {
     createWinStateElements(winGif);
-    //});
     // Else get thumbs-down gif and call lose state elements
     } else {
-      console.log("loseState")
     const loseGif = await getGiphyData("thumbs-down");
     console.log({loseGif})
-    //.then(function () {
     createLoseStateElements(loseGif);
-    //});
     }
       }
         }
