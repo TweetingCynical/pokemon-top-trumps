@@ -9,7 +9,6 @@ function checkWinState(userChoice) {
     cpuCardData[roundNum].Attack +
     cpuCardData[roundNum].Defense +
     cpuCardData[roundNum].Speed;
-  let winState = 0;
 
   if (userCardData[roundNum][userChoice] > cpuCardData[roundNum][userChoice]) {
     userScore++;
@@ -22,7 +21,6 @@ function checkWinState(userChoice) {
     userCardTotal > cpuCardTotal
   ) {
     userScore++;
-    winState = 2;
     $("#afterRoundLongTitle").text("TECHNICALITY WIN");
     $("#afterRoundMessage").text(
       `You chose ${userChoice} which had the same score as your opponent. The Total score of your card was higher, so you won Round ${
@@ -57,6 +55,7 @@ function nextRound() {
       checkFinalWinState();
       return;
     } else {
+      console.log({roundNum})
       resetButtons();
       fillCardData(roundNum);
       hideCPUCard();

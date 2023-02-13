@@ -169,7 +169,7 @@ function createWinStateElements(winGif) {
     let userName = storedUserName;
     let winHeader = $("<h3>").text("Congratulations!");
     let winText = $("<h4>").text(`${userName}, you have won the game!`);
-    const winGifURL = data.data[0].images.downsized.url;
+    const winGifURL = data.data[0].images.original.url;
     const winGifImg = $("<img>").attr("src", winGifURL);
     $("#win-state").append(winHeader, winText, winGifImg);
   });
@@ -182,7 +182,7 @@ function createLoseStateElements(loseGif) {
     let userName = storedUserName;
     let loseHeader = $("<h3>").text("Oh no!");
     let loseText = $("<h4>").text(`${userName}, you have lost!`);
-    const loseGifURL = data.data[0].images.downsized.url;
+    const loseGifURL = data.data[0].images.original.url;
     const loseGifImg = $("<img>").attr("src", loseGifURL);
     $("#lose-state").append(loseHeader, loseText, loseGifImg);
   });
