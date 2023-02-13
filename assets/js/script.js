@@ -11,7 +11,8 @@ const abilityOptions = ["HP", "Attack", "Defense", "Speed"];
 let userCardData = [];
 let cpuCardData = [];
 let roundNum = 0;
-let score = 0;
+let userScore = 0;
+// let score = 0;
 
 // Function to be used for fetching data from Pokemon API
 function getPokemonData(whoseCardData) {
@@ -28,6 +29,7 @@ function getPokemonData(whoseCardData) {
     };
     let promise = $.ajax(ajaxData);
     promises.push(promise);
+    console.log(promises);
   }
 
   // Get all promises data and store the pokemon information we need for game data
@@ -53,15 +55,10 @@ function getPokemonData(whoseCardData) {
 
 // Function for getting a random GIPHY image
 function getGiphyData(state) {
-  const fullGiphyURL = `${partGiphyURL}?q=${state}&api_key=${giphyAPIKey}&limit=10`;
-
-  // Data fetch
-  $.ajax({
-    url: fullGiphyURL,
-    method: "GET",
-  }).then(function (data) {
-    return;
-  });
+  const dataa = fetch(
+    `${partGiphyURL}?q=${state}&api_key=${giphyAPIKey}&limit=1`
+  ).then((response) => response.json());
+  return dataa;
 }
 
 // Get a random number for referencing a character choice from dataOptions
@@ -76,8 +73,6 @@ function randomOption() {
   }
   return randomArr;
 }
-
-// Check localStorage for cards data
 
 // Create cards in html
 function createCardElements(whoseCard) {
@@ -126,15 +121,6 @@ function createCardElements(whoseCard) {
   $(".userCardBtn").removeClass("hidden");
 }
 
-// Add event listener for userCardBtn
-// $("#userCard").on("click", ".userCardBtn", function () {
-//   // NOTE: This is NOT ready yet. Just an experiment for how to handle the visual change
-//   let userChoice = $(this).find("p[id$='Value']").attr("class");
-//   showCPUCard();
-//   $(`.${userChoice}`).parent().parent().addClass("selected");
-//   return console.log(userChoice);
-// });
-
 // Show cpu card details after user has made a choice
 function showCPUCard() {
   $("#cpuCardName").removeClass("hidden");
@@ -174,6 +160,32 @@ function checkLocalStorage() {
     );
     $(".clearBtn").addClass("hidden");
   }
+}
+
+function createWinStateElements(winGif) {
+  getGiphyData(winGif).then(function (data) {
+    console.log(data);
+    let storedUserName = JSON.parse(localStorage.getItem("userName"));
+    let userName = storedUserName;
+    let winHeader = $("<h3>").text("Congratulations!");
+    let winText = $("<h4>").text(`${userName}, you have won the game!`);
+    const winGifURL = data.data[0].images.downsized.url;
+    const winGifImg = $("<img>").attr("src", winGifURL);
+    $("#win-state").append(winHeader, winText, winGifImg);
+  });
+}
+
+function createLoseStateElements(loseGif) {
+  getGiphyData(loseGif).then(function (data) {
+    console.log(data);
+    let storedUserName = JSON.parse(localStorage.getItem("userName"));
+    let userName = storedUserName;
+    let loseHeader = $("<h3>").text("Oh no!");
+    let loseText = $("<h4>").text(`${userName}, you have lost!`);
+    const loseGifURL = data.data[0].images.downsized.url;
+    const loseGifImg = $("<img>").attr("src", loseGifURL);
+    $("#lose-state").append(loseHeader, loseText, loseGifImg);
+  });
 }
 
 // Start game button
@@ -226,13 +238,6 @@ function resetButtons() {
 
 // Play again option, including clearing localStorage, resetting scores, and rerunning the getData
 
-// Initialise game options
-createCardElements("userCard");
-createCardElements("cpuCard");
-getPokemonData(userCardData);
-getPokemonData(cpuCardData);
-checkLocalStorage();
-
 // Click events for each of the user's card options
 function userChoiceEvent(elementID, buttonClass) {
   $(elementID).on("click", function () {
@@ -244,8 +249,38 @@ function userChoiceEvent(elementID, buttonClass) {
   });
 }
 
-// Call of button click events
-userChoiceEvent("#userCardHPBtn", ".HP");
-userChoiceEvent("#userCardAttackBtn", ".Attack");
-userChoiceEvent("#userCardDefenseBtn", ".Defense");
-userChoiceEvent("#userCardSpeedBtn", ".Speed");
+function init() {
+  // Update display
+  $("#rounds").addClass("hidden");
+  $("#scores").addClass("hidden");
+  $("#round").text(`${roundNum}/5`);
+  $("#score").text(userScore);
+
+  // Hide finalModal and reset cardZone to original state
+  $("#finalModal").modal("hide");
+  $(".cardZone").addClass("hidden");
+  $("#userCardContainer").remove();
+  $("#cpuCardContainer").remove();
+  $("#win-state").empty().addClass("hidden");
+  $("#lose-state").empty().addClass("hidden");
+
+  // Initialise game options
+  createCardElements("userCard");
+  createCardElements("cpuCard");
+  getPokemonData(userCardData);
+  getPokemonData(cpuCardData);
+  checkLocalStorage();
+  // Call of button click events
+  userChoiceEvent("#userCardHPBtn", ".HP");
+  userChoiceEvent("#userCardAttackBtn", ".Attack");
+  userChoiceEvent("#userCardDefenseBtn", ".Defense");
+  userChoiceEvent("#userCardSpeedBtn", ".Speed");
+  // Run these functions so that the cards are pre-created with data from the outset.
+  createWinStateElements("celebrate");
+  createLoseStateElements("thumbs-down");
+  // Show start screen
+  $("#startCard").removeClass("hidden");
+}
+
+// Run on page load
+init();
