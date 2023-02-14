@@ -1,9 +1,0 @@
-.modal-header {
-  background: #ff0000;
-  color: #f3f6f4;
-}
-
-.required::after {
-  content: "*";
-  color: #ff0000;
-}
