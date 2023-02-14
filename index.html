@@ -13,6 +13,39 @@
 </head>
 
 <body>
+
+  <main>
+    <!-- Demo modal -->
+    <div class="container mt-5">
+      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Ready to play</button>
+      <div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Ready to play</h5>
+              <button type="button" class="btn-close" data-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div>
+                  <label class="form-label required">Name</label>
+                  <input type="text" class="form-control">
+                </div>
+                <div>
+                  <label class="form-label required">Password</label>
+                  <input type="text" class="form-control">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="start" class="btn btn-warning">Start</button>
+              <button type="submit" class="btn btn-primary">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </main>
   <!-- Page header -->
   <header>
     <h1>Top Trumps Game</h1>
@@ -40,116 +73,12 @@
 
   <main>
     <!-- Demo modal -->
-    <section>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-        Launch demo modal
-      </button>
-      <div class="modal" tabindex="-1" id="myModal">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">User name</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>score</p>
-              <img src="" alt="">
-              <button type="button" class="btn btn-primary">Re-start</button>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <button class="btn btn-xs btn-success" data-toggle="modal" data-target=".modal">Modal</button>
-      <div class="modal fade"></div>
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-hearder">
-
-            Modal header
-          </div>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <div class="modal-body">
-            <div class="form-group">
-              <label>Name</label>
-              <input type="email" name="email" class="form-control" required="">
-            </div>
-            <div class="form-group">
-              <label>password</label>
-              <input type="password" name="password" class="form-control" required="">
-            </div>
-          </div>
-          <div class="modal-footer">
-            <input type="submit" name="submit" value="submit" class="btn btn-sm btn-success">
-          </div>
-        </div>
-      </div>
-      </div>
-      </div>
-    </section>
-    <section>
-      <p>
-        <button class="btn btn-xs btn-warning" data-toggle="modal" data-target="#modal2">Modal 2</button>
-      </p>
-      <div class="modal-fade" id="Modal2"></div>
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button class="close" data-dismiss="modal">&times;</button>
-            Modal header
-          </div>
-          <div class="modal-body">
-            This is Modal number 2
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-sm btn-danger" data-dismiss="modal">close</button>
-          </div>
-        </div>
-      </div>
-      </div>
-      </div>
-    </section>
+    
+    
+   
 
     <!-- Another modal -->
-    <section>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-        Launch demo modal
-      </button>
-
-      <div class="modal" tabindex="-1" id="myModal">
-      </div>
-      <section id="rounds-modal">
-        <div class="container-modal">
-          <div class="modal" tabindex="-1">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Modal title</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <p>Modal body text goes here.</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+    
 
   </main>
 
