@@ -17,7 +17,8 @@ let userScore = 0;
 // Function to be used for fetching data from Pokemon API
 function getPokemonData(whoseCardData) {
   // Create optionsIndex filled with 5 random numbers for creating api keys
-  const optionsIndex = randomOption();
+  const optionsIndex = randomOption(1, 200, 5);
+  console.log(optionsIndex);
   // Empty arr for storing promises together
   let promises = [];
 
@@ -29,7 +30,6 @@ function getPokemonData(whoseCardData) {
     };
     let promise = $.ajax(ajaxData);
     promises.push(promise);
-    console.log(promises);
   }
 
   // Get all promises data and store the pokemon information we need for game data
@@ -56,19 +56,19 @@ function getPokemonData(whoseCardData) {
 // Function for getting a random GIPHY image
 function getGiphyData(state) {
   const dataa = fetch(
-    `${partGiphyURL}?q=${state}&api_key=${giphyAPIKey}&limit=1`
+    `${partGiphyURL}?q=${state}&api_key=${giphyAPIKey}&limit=10`
   ).then((response) => response.json());
   return dataa;
 }
 
 // Get a random number for referencing a character choice from dataOptions
-function randomOption() {
+function randomOption(x, y, z) {
   // Empty array for storing random numbers
   const randomArr = [];
 
   // For loop to get 5 random numbers. NOTE: Change the multiplier to get a different number of options
-  for (let iteration = 0; iteration < 5; iteration++) {
-    const randomIndex = Math.floor(Math.random() * 200) + 1;
+  for (let iteration = 0; iteration < z; iteration++) {
+    const randomIndex = Math.floor(Math.random() * (y - x + 1)) + x;
     randomArr.push(randomIndex);
   }
   return randomArr;
@@ -94,7 +94,7 @@ function createCardElements(whoseCard) {
     <h3 class="cardHeader shadows rounded p-1 hidden" id="${whoseCard}Name">Character</h3>
     <img class="cardImage shadows rounded bg-white hidden shimmer" id="${whoseCard}Image" alt="pokemon character shiny image"/>
   </div>  
-  `
+  `;
   whoseCardEl.append(cardEl);
   // Create buttons
   for (let i = 0; i < 4; i++) {
@@ -170,11 +170,12 @@ function checkLocalStorage() {
 
 function createWinStateElements(winGif) {
   getGiphyData(winGif).then(function (data) {
+    const randomChoice = randomOption(0, 9, 1);
     const storedUserName = JSON.parse(localStorage.getItem("userName"));
     const userName = storedUserName;
     const winHeader = $("<h3>").text("Congratulations!");
     const winText = $("<h4>").text(`${userName}, you have won the game!`);
-    const winGifURL = data.data[0].images.original.url;
+    const winGifURL = data.data[randomChoice[0]].images.original.url;
     const winGifImg = $("<img>").attr("src", winGifURL);
     $("#win-state").append(winHeader, winText, winGifImg);
   });
@@ -182,11 +183,12 @@ function createWinStateElements(winGif) {
 
 function createLoseStateElements(loseGif) {
   getGiphyData(loseGif).then(function (data) {
+    const randomChoice = randomOption(0, 9, 1);
     const storedUserName = JSON.parse(localStorage.getItem("userName"));
     const userName = storedUserName;
     const loseHeader = $("<h3>").text("Oh no!");
     const loseText = $("<h4>").text(`${userName}, you have lost!`);
-    const loseGifURL = data.data[0].images.original.url;
+    const loseGifURL = data.data[randomChoice[0]].images.original.url;
     const loseGifImg = $("<img>").attr("src", loseGifURL);
     $("#lose-state").append(loseHeader, loseText, loseGifImg);
   });
@@ -216,8 +218,12 @@ $(".clearBtn").click(function () {
 // Fill cards with data >>> Show values for user
 function fillCardData(round) {
   // Names
-  $("#userCardName").text(userCardData[round].pkName).css('textTransform', 'capitalize');
-  $("#cpuCardName").text(cpuCardData[round].pkName).css('textTransform', 'capitalize');
+  $("#userCardName")
+    .text(userCardData[round].pkName)
+    .css("textTransform", "capitalize");
+  $("#cpuCardName")
+    .text(cpuCardData[round].pkName)
+    .css("textTransform", "capitalize");
   // Images
   $("#userCardImage").attr("src", userCardData[round].Image);
   $("#cpuCardImage").attr("src", cpuCardData[round].Image);
