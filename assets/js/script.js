@@ -216,8 +216,8 @@ $(".clearBtn").click(function () {
 // Fill cards with data >>> Show values for user
 function fillCardData(round) {
   // Names
-  $("#userCardName").text(userCardData[round].pkName);
-  $("#cpuCardName").text(cpuCardData[round].pkName);
+  $("#userCardName").text(userCardData[round].pkName).css('textTransform', 'capitalize');
+  $("#cpuCardName").text(cpuCardData[round].pkName).css('textTransform', 'capitalize');
   // Images
   $("#userCardImage").attr("src", userCardData[round].Image);
   $("#cpuCardImage").attr("src", cpuCardData[round].Image);
