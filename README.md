@@ -67,10 +67,11 @@ Some of the key JavaScript skills being utilised:
 
 ### Suggested future changes
 
-- Display card name in upper case, or capitalise
+- ✅ ~~Refactor the randomOption function to that we can use it for two purposes (multiple random numbers for selecting Pokemon characters, and one single random number with set limits for displaying a different Giphy)~~
+- ✅ ~~Display card name in upper case, or capitalise~~
 - Add screen shots to instructions modal
 - Add glow effects to the buttons
-- Add animation effect to the cards so they appear to flip over
+- ✅ ~~Add animation effect to the cards so they appear to flip over~~
 - Advanced: Display all five user cards in a row, so they can choose which card to play, and then remove that card from their available row once played. This will require choosing cards out of sync, so the logic would need to take into account a different index sequence
 - Advanced: Display screen which shows who each card belongs to at the end of the game. This could be acheived by pushing the array index of each card into a new array titled cards won, cards lost.
 
