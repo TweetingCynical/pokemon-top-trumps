@@ -33,7 +33,7 @@
 ### Screenshot
 
 Working version of site should look like this at standard screen size:
-![Site Screenshot](./assets/screenshot.png)
+![Demo video](./assets/images/demo.mp4)
 
 ### Scope and Purpose
 
@@ -65,11 +65,145 @@ Steps to achieving the working Pokemon Top Trumps App:
 
 Some of the key JavaScript skills being utilised:
 
+- Use of promises and ajax GET method on the Pokémon api data:
+
+```javascript
+// Function to be used for fetching data from Pokemon API
+function getPokemonData(whoseCardData) {
+  // Create optionsIndex filled with 5 random numbers for creating api keys
+  const optionsIndex = randomOption(1, 200, 5);
+  // Empty arr for storing promises together
+  let promises = [];
+
+  // Create promises for all 5 api calls
+  for (let index = 0; index < optionsIndex.length; index++) {
+    let ajaxData = {
+      url: `${partURL}${optionsIndex[index]}`,
+      method: "GET",
+    };
+    let promise = $.ajax(ajaxData);
+    // Push each promise into promises array
+    promises.push(promise);
+  }
+
+  // Get all promises data and store the pokemon information we need for game data
+  Promise.all(promises).then((data) => {
+    for (let i = 0; i < data.length; i++) {
+      whoseCardData.push({
+        // Pokemon name
+        pkName: data[i].name,
+        // HP
+        HP: data[i].stats[0]["base_stat"],
+        // Attack
+        Attack: data[i].stats[1]["base_stat"],
+        // Defense
+        Defense: data[i].stats[2]["base_stat"],
+        // Speed
+        Speed: data[i].stats[5]["base_stat"],
+        // Pokemon image
+        Image: data[i].sprites.other["official-artwork"].front_shiny,
+      });
+    }
+  });
+}
+```
+
+- Use of a reusable function with passed parameters for the giphy api data fetch:
+
+```javascript
+// Function for getting a random GIPHY image
+function getGiphyData(state) {
+  const giphyData = fetch(
+    `${partGiphyURL}?q=${state}&api_key=${giphyAPIKey}&limit=10`
+  ).then((response) => response.json());
+  return giphyData;
+}
+```
+
+- Use of a resubale random number function for getting an array of z random numbers, between x and y:
+
+```javascript
+// Get a random number for referencing a character and for choosing a random giphy
+function randomOption(x, y, z) {
+  // Empty array for storing random numbers
+  const randomArr = [];
+
+  // For loop to get 5 random numbers. NOTE: Change the multiplier to get a different number of options
+  for (let iteration = 0; iteration < z; iteration++) {
+    const randomIndex = Math.floor(Math.random() * (y - x + 1)) + x;
+    randomArr.push(randomIndex);
+  }
+  return randomArr;
+}
+```
+
+- Use of data-choice attributes to get the target click details and use them in the game logic:
+
+```javascript
+// Click events for each of the user's card options
+function userChoiceEvent(elementID, buttonClass) {
+  $(elementID).on("click", function () {
+    let userChoice = $(this).attr("data-choice");
+    showCPUCard();
+    $(document).find($(buttonClass)).parent().parent().addClass("selected");
+    checkWinState(userChoice);
+    return userChoice;
+  });
+}
+```
+
+- Use of an init function which doubles as a reset game options function to minimise the need to repeat code
+
+```javascript
+function init() {
+  // Update display
+  $("#rounds").addClass("hidden");
+  $("#scores").addClass("hidden");
+  $("#round").text(`${roundNum}/5`);
+  $("#score").text(userScore);
+  $(".nextRound").text("Next Round");
+
+  // Hide finalModal and reset cardZone to original state
+  $("#finalModal").modal("hide");
+  $(".cardZone").addClass("hidden");
+  $("#userCardContainer").remove();
+  $("#cpuCardContainer").remove();
+  $("#win-state").empty().addClass("hidden");
+  $("#lose-state").empty().addClass("hidden");
+
+  // Initialise game options
+  createCardElements("userCard");
+  createCardElements("cpuCard");
+  getPokemonData(userCardData);
+  getPokemonData(cpuCardData);
+  // Call of button click events
+  userChoiceEvent("#userCardHPBtn", ".HP");
+  userChoiceEvent("#userCardAttackBtn", ".Attack");
+  userChoiceEvent("#userCardDefenseBtn", ".Defense");
+  userChoiceEvent("#userCardSpeedBtn", ".Speed");
+  // Run these functions so that the cards are pre-created with data from the outset.
+  checkLocalStorage();
+  // Show start screen
+  $("#startCard").removeClass("hidden");
+}
+```
+
+- Use of specific jQuery and CSS combinations to hide and show elements, and to empty child elements:
+
+```javascript
+$("#finalModal").modal("hide");
+$(".cardZone").addClass("hidden");
+$("#userCardContainer").remove();
+$("#cpuCardContainer").remove();
+$("#win-state").empty().addClass("hidden");
+```
+
 ### Suggested future changes
 
 - ✅ ~~Refactor the randomOption function to that we can use it for two purposes (multiple random numbers for selecting Pokemon characters, and one single random number with set limits for displaying a different Giphy)~~
+- ✅ ~~Add a glittery effect to the background of the card image~~
 - ✅ ~~Display card name in upper case, or capitalise~~
-- Add screen shots to instructions modal
+- ✅ ~~Add screen shots to instructions modal~~
 - Add glow effects to the buttons
 - ✅ ~~Add animation effect to the cards so they appear to flip over~~
 - Advanced: Display all five user cards in a row, so they can choose which card to play, and then remove that card from their available row once played. This will require choosing cards out of sync, so the logic would need to take into account a different index sequence
