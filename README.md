@@ -160,7 +160,7 @@ function getGiphyData(state) {
 }
 ```
 
-- Use of a resubale random number function for getting an array of z random numbers, between x and y:
+- Use of a reusable random number function for getting an array of z random numbers, between x and y:
 
 ```javascript
 // Get a random number for referencing a character and for choosing a random giphy
