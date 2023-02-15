@@ -8,7 +8,7 @@
   <ol>
         <li><a href="#about-the-project">About The Project</a></li>
         <li><a href="#deployment">Deployment / Code Repository</a></li>
-        <li><a href="#screenshot">Screenshot</a></li>
+        <li><a href="#working-site">Working Site</a></li>
         <li><a href="#scope-and-purpose">Scope and Purpose</a></li>
         <li><a href="#usage">Usage</a></li>
         <li><a href="#credits">Credits</a></li>
@@ -30,10 +30,12 @@
 
 [Repository](https://github.com/TweetingCynical/pokemon-top-trumps)
 
-### Screenshot
+### Working Site
 
-Working version of site should look like this at standard screen size:
-![Demo video](./assets/images/demo.mp4)
+<video controls>
+  <source src="./assets/images/demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ### Scope and Purpose
 
