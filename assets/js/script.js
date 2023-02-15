@@ -267,6 +267,7 @@ function init() {
   $("#scores").addClass("hidden");
   $("#round").text(`${roundNum}/5`);
   $("#score").text(userScore);
+  $(".nextRound").text("Next Round");
 
   // Hide finalModal and reset cardZone to original state
   $("#finalModal").modal("hide");
