@@ -2,8 +2,8 @@
 
 GROUP 1 - USING POKEMON API TO POPULATE CARDS
 
-1. On page load, we want to create the HTML elements for each card. Name = <h3>. Image <img> (add class "hidden" / and in CSS make that class have attribute of display: hidden)
-2. Then for HP, Attack, Defense and speed create a loop using a <div> (with the id of divHP, divAttach, divDefense, divSpeed so when it is clicked later in the game the whole div can be selected) and then for each category <button text element + text element> and append to that div.
+1. On page load, we want to create the HTML elements for each card. Name = h3. Image img (add class "hidden" / and in CSS make that class have attribute of display: hidden)
+2. Then for HP, Attack, Defense and speed create a loop using a div (with the id of divHP, divAttach, divDefense, divSpeed so when it is clicked later in the game the whole div can be selected) and then for each category button text element + text element and append to that div.
 3. We will display a placeholder/background image on the playerCard and cpuCard (suggest this https://www.google.com/url?sa=i&url=https%3A%2F%2Fbulbapedia.bulbagarden.net%2Fw%2Findex.php%3Ftitle%3DFile%3ACardback.jpg%26oldid%3D0&psig=AOvVaw2_Nmj9bfMXGGMlhEKoFkp3&ust=1675977334187000&source=images&cd=vfe&ved=0CA8QjRxqFwoTCPCS2J_shv0CFQAAAAAdAAAAABAD).
 4. When we hit the start button, ask them their name in a modal and save to localstorage. The modal should contain text-area (required), submitBtn and clearBtn
 5. Remove class "hidden" for Player card)
