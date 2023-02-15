@@ -172,7 +172,9 @@ function createWinStateElements(winGif) {
     const winHeader = $("<h3>").text("Congratulations!");
     const winText = $("<h4>").text(`${userName}, you have won the game!`);
     const winGifURL = data.data[randomChoice[0]].images.original.url;
-    const winGifImg = $("<img>").attr("src", winGifURL).addClass("finalModalImage").css({ "max-width": "100%", height: "auto" });;
+    const winGifImg = $("<img>")
+      .attr("src", winGifURL)
+      .addClass("finalModalImage");
     $("#win-state").append(winHeader, winText, winGifImg);
   });
 }
