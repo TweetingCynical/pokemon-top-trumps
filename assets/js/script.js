@@ -2,6 +2,7 @@
 const userCard = $("#userCard");
 const cpuCard = $("#cpuCard");
 const clearBtn = $(".btn-clear");
+const finalModal = $("#finalModal");
 
 // Set intial global variables needed for accessing data
 const partURL = "https://pokeapi.co/api/v2/pokemon/";
@@ -12,13 +13,11 @@ let userCardData = [];
 let cpuCardData = [];
 let roundNum = 0;
 let userScore = 0;
-// let score = 0;
 
 // Function to be used for fetching data from Pokemon API
 function getPokemonData(whoseCardData) {
   // Create optionsIndex filled with 5 random numbers for creating api keys
   const optionsIndex = randomOption(1, 200, 5);
-  console.log(optionsIndex);
   // Empty arr for storing promises together
   let promises = [];
 
@@ -29,6 +28,7 @@ function getPokemonData(whoseCardData) {
       method: "GET",
     };
     let promise = $.ajax(ajaxData);
+    // Push each promise into promises array
     promises.push(promise);
   }
 
@@ -55,13 +55,13 @@ function getPokemonData(whoseCardData) {
 
 // Function for getting a random GIPHY image
 function getGiphyData(state) {
-  const dataa = fetch(
+  const giphyData = fetch(
     `${partGiphyURL}?q=${state}&api_key=${giphyAPIKey}&limit=10`
   ).then((response) => response.json());
-  return dataa;
+  return giphyData;
 }
 
-// Get a random number for referencing a character choice from dataOptions
+// Get a random number for referencing a character and for choosing a random giphy
 function randomOption(x, y, z) {
   // Empty array for storing random numbers
   const randomArr = [];
@@ -76,19 +76,9 @@ function randomOption(x, y, z) {
 
 // Create cards in html
 function createCardElements(whoseCard) {
+  // Link to correct card - userCard or cpuCard by ID
   const whoseCardEl = $(`#${whoseCard}`);
-  // const cardEl = $("<div>")
-  //   .addClass("card shadows p-3 mb-5 rounded")
-  //   .attr("id", `${whoseCard}Container`);
-  // const nameEl = $("<h3>")
-  //   .addClass("cardHeader shadows rounded p-1 hidden")
-  //   .attr("id", `${whoseCard}Name`)
-  //   .text("Character");
-  // const imgEl = $("<img>")
-  //   .addClass("cardImage shadows rounded bg-white hidden shimmer")
-  //   .attr("id", `${whoseCard}Image`)
-  //   .attr("alt", "pokemon character shiny image");
-  // cardEl.append(nameEl, imgEl);
+  // Create a card element with all child elements necessary
   const cardEl = `
   <div class="card shadows p-3 mb-5 rounded" id="${whoseCard}Container">
     <h3 class="cardHeader shadows rounded p-1 hidden" id="${whoseCard}Name">Character</h3>
@@ -96,6 +86,7 @@ function createCardElements(whoseCard) {
   </div>  
   `;
   whoseCardEl.append(cardEl);
+
   // Create buttons
   for (let i = 0; i < 4; i++) {
     const abilityBtn = $("<button>")
@@ -115,13 +106,14 @@ function createCardElements(whoseCard) {
       .addClass(`${abilityOptions[i]} ${whoseCard}${abilityOptions[i]}Value`)
       .attr("id", `${abilityOptions[i]}`)
       .text("TestDIV");
+
+    // Append all button elements to correct card
     $(`#${whoseCard}Container`).append(
       abilityBtn.append(abilityDiv.append(abilityTitle, abilityValue))
     );
   }
-  // whoseCardEl.append(cardEl);
 
-  // NOTE: This needs to be correctly placed later, but for now is being used to test:
+  // Now show the elements inside the userCard only
   $("#userCardName").removeClass("hidden");
   $("#userCardImage").removeClass("hidden");
   $(".userCardBtn").removeClass("hidden");
@@ -138,6 +130,7 @@ function showCPUCard() {
   }, 1000);
 }
 
+// Hide cpu card details after user begins a new round
 function hideCPUCard() {
   $("#cpuCardName").addClass("hidden");
   $("#cpuCardImage").addClass("hidden");
@@ -156,10 +149,12 @@ function checkLocalStorage() {
   // If stored array is not empty, set userName variable to local stored value
   if (storedUserName !== null) {
     userName = storedUserName;
+    // Update the personalised welcome message on Start card
     $("#userName").val(userName);
     $("#startTitle").text("Welcome Back");
     $(".clearBtn").removeClass("hidden");
   } else {
+    // No userName stored, so use welcome message for new user
     $("#userName").val("");
     $("#startTitle").text(
       "Are you ready to enter the world of Pokemon Top Trumps?"
@@ -168,6 +163,7 @@ function checkLocalStorage() {
   }
 }
 
+// Call giphy api, and add loseGif and message to final modal
 function createWinStateElements(winGif) {
   getGiphyData(winGif).then(function (data) {
     const randomChoice = randomOption(0, 9, 1);
@@ -176,11 +172,12 @@ function createWinStateElements(winGif) {
     const winHeader = $("<h3>").text("Congratulations!");
     const winText = $("<h4>").text(`${userName}, you have won the game!`);
     const winGifURL = data.data[randomChoice[0]].images.original.url;
-    const winGifImg = $("<img>").attr("src", winGifURL);
+    const winGifImg = $("<img>").attr("src", winGifURL).addClass("finalModalImage");
     $("#win-state").append(winHeader, winText, winGifImg);
   });
 }
 
+// Call giphy api, and add loseGif and message to final modal
 function createLoseStateElements(loseGif) {
   getGiphyData(loseGif).then(function (data) {
     const randomChoice = randomOption(0, 9, 1);
@@ -246,10 +243,6 @@ function resetButtons() {
   $(".cardAbilityBtn").removeClass("selected");
 }
 
-// End game logic showing giphy for win/loss
-
-// Play again option, including clearing localStorage, resetting scores, and rerunning the getData
-
 // Click events for each of the user's card options
 function userChoiceEvent(elementID, buttonClass) {
   $(elementID).on("click", function () {
@@ -259,6 +252,85 @@ function userChoiceEvent(elementID, buttonClass) {
     checkWinState(userChoice);
     return userChoice;
   });
+}
+
+function checkWinState(userChoice) {
+  let userCardTotal =
+    userCardData[roundNum].HP +
+    userCardData[roundNum].Attack +
+    userCardData[roundNum].Defense +
+    userCardData[roundNum].Speed;
+  let cpuCardTotal =
+    cpuCardData[roundNum].HP +
+    cpuCardData[roundNum].Attack +
+    cpuCardData[roundNum].Defense +
+    cpuCardData[roundNum].Speed;
+
+  if (userCardData[roundNum][userChoice] > cpuCardData[roundNum][userChoice]) {
+    userScore++;
+    $("#afterRoundLongTitle").text("YOU WIN");
+    $("#afterRoundMessage").text(
+      `Congratulations, you won Round ${roundNum + 1}`
+    );
+  } else if (
+    userCardData[roundNum][userChoice] === cpuCardData[roundNum][userChoice] &&
+    userCardTotal > cpuCardTotal
+  ) {
+    userScore++;
+    $("#afterRoundLongTitle").text("TECHNICALITY WIN");
+    $("#afterRoundMessage").text(
+      `You chose ${userChoice} which had the same score as your opponent. The Total score of your card was higher, so you won Round ${
+        roundNum + 1
+      }`
+    );
+  } else {
+    $("#afterRoundLongTitle").text("YOU LOSE");
+    $("#afterRoundMessage").text(`Unlucky, you lost Round ${roundNum + 1}`);
+  }
+
+  roundNum++;
+  document.getElementById("score").textContent = userScore;
+  document.getElementById("round").textContent = `${roundNum}/5`;
+
+  // Call modal for next round prompt
+  $("#afterRound").modal({ show: true });
+  if (roundNum === 5) {
+    $(".nextRound").text("Review");
+  }
+  nextRound();
+  return;
+}
+
+// Decide which modal to display
+function nextRound() {
+  $(".nextRound, #afterRound").on("click hide.bs.modal", function () {
+    if (roundNum === 5) {
+      resetButtons();
+      $("#afterRound").modal({ show: false });
+      checkFinalWinState();
+      return;
+    } else {
+      resetButtons();
+      fillCardData(roundNum);
+      hideCPUCard();
+    }
+  });
+}
+
+// Then check if user has won or lost
+function checkFinalWinState() {
+  // End of round 5, show finalModal
+  if (roundNum === 5) {
+    // If user score more than 2 then get celebrate gif and call win state elements
+    if (userScore > 2) {
+      $("#win-state").removeClass("hidden");
+      // Else get thumbs-down gif and call lose state elements
+    } else {
+      $("#lose-state").removeClass("hidden");
+    }
+    finalModal.modal({ show: true });
+    return;
+  }
 }
 
 function init() {
@@ -288,8 +360,6 @@ function init() {
   userChoiceEvent("#userCardDefenseBtn", ".Defense");
   userChoiceEvent("#userCardSpeedBtn", ".Speed");
   // Run these functions so that the cards are pre-created with data from the outset.
-  // createWinStateElements("celebrate");
-  // createLoseStateElements("thumbs-down");
   checkLocalStorage();
   // Show start screen
   $("#startCard").removeClass("hidden");
@@ -297,3 +367,13 @@ function init() {
 
 // Run on page load
 init();
+
+// Reset game button
+$("#resetGame").click(function () {
+  // Reset user and cpu cards, roundNum and userScore
+  userCardData = [];
+  cpuCardData = [];
+  roundNum = 0;
+  userScore = 0;
+  init();
+});
