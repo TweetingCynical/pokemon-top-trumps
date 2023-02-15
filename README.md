@@ -8,7 +8,7 @@
   <ol>
         <li><a href="#about-the-project">About The Project</a></li>
         <li><a href="#deployment">Deployment / Code Repository</a></li>
-        <li><a href="#working-site">Working Site</a></li>
+        <li><a href="#screenshot">Screenshot</a></li>
         <li><a href="#scope-and-purpose">Scope and Purpose</a></li>
         <li><a href="#usage">Usage</a></li>
         <li><a href="#credits">Credits</a></li>
@@ -30,12 +30,14 @@
 
 [Repository](https://github.com/TweetingCynical/pokemon-top-trumps)
 
-### Working Site
+### Screenshot
 
-<video controls>
-  <source src="./assets/images/demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+Working version of the site should look like this at standard screen size:
+<img src="./assets/images/screenshot-startgame.png" alt="Start Screen" style="max-width: 400px;">
+<img src="./assets/images/screenshot-prechoice.png" alt="Pre Choice" style="max-width: 400px;">
+<img src="./assets/images/screenshot-userchoice.png" alt="User Choice" style="max-width: 400px;">
+<img src="./assets/images/screenshot-technicalitywin.png" alt="Technicality Win" style="max-width: 400px;">
+<img src="./assets/images/screenshot-endgame.png" alt="End Screen" style="max-width: 400px;">
 
 ### Scope and Purpose
 
