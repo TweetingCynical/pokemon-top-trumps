@@ -27,10 +27,19 @@ header {
 
 /* Media query for smaller screens */
 @media (max-width: 576px) {
-/* Buttons column with spacing */
+
+  /* Buttons column with spacing */
   #startCard button {
     display: block;
     margin: 0.5rem auto;
+  }
+
+  #logo {
+    width: 100px;
+  }
+
+  #title h1 {
+    display: none;
   }
 }
 
